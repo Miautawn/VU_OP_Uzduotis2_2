@@ -1,5 +1,6 @@
 #include "martyno_lib.h"
 
+//Pagrindinė struktūra
 struct Student
 {
   string name;
@@ -11,6 +12,9 @@ struct Student
   double final_score;
 };
 
+//UTILITY FUNKCIJOS
+///////////////////
+
 //ši funkcija paklausia taip arba ne klausimo
 bool yes_or_no(string text)
 {
@@ -21,16 +25,6 @@ bool yes_or_no(string text)
     cin>>option;
   }
   return option == "y";
-}
-
-//ši funkcija nuskaito studento vardą/pavardę
-void get_credentials(Student &new_student)
-{
-  cout<<"\nPrašoma įrašyti studento \n";
-  cout<<"vardą: ";
-  cin>>new_student.name;
-  cout<<"pavardę: ";
-  cin>>new_student.last_name;
 }
 
 //funkcija, kuri patikrina ar ivestas tekstas yra skaicius
@@ -59,6 +53,22 @@ int input_integer(string text, string err_text, string exit_string, int lower_bo
   }
 }
 
+///////////////////
+//UTILITY FUNKCIJOS
+
+
+
+//ši funkcija nuskaito studento vardą/pavardę
+void get_credentials(Student &new_student)
+{
+  cout<<"\nPrašoma įrašyti studento \n";
+  cout<<"vardą: ";
+  cin>>new_student.name;
+  cout<<"pavardę: ";
+  cin>>new_student.last_name;
+}
+
+//Ši funkcija sugeneruoja pažymius
 void generate_grades(int &n, Student &new_student)
 {
     //jeigu vartotojas nepasakė kiek turi būti pažymių
@@ -72,6 +82,7 @@ void generate_grades(int &n, Student &new_student)
     cout<<"\nIr egzamino rezultatas: "<<new_student.exam_score<<endl;
 }
 
+//Ši funkcija nuskaito pažymius iš vartotojo
 void input_grades(int &n, Student &new_student)
 {
     //jei vartotojas nepasakė kiek turi būti pažymių, jis ves, kol jam pabos
@@ -104,6 +115,7 @@ void input_grades(int &n, Student &new_student)
     new_student.exam_score = exam_grade;
 }
 
+//Ši funkcija suskaičiuoja galutinį balą
 void calculate_final(int grade_num, Student &new_student)
 {
   //jeigu yra nd pažymių
@@ -130,7 +142,6 @@ void calculate_final(int grade_num, Student &new_student)
     } 
   } else new_student.mean_or_median = 0; //jeigu pažymių iš ND nebuvo
 
-  //skaičiuojama galutinis balas
   new_student.final_score = 0.4 * new_student.mean_or_median + 0.6 * new_student.exam_score;
 }
 
