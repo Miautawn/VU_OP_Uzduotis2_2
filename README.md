@@ -9,7 +9,7 @@ Matilda        Anastasija                       8.20
 ```
 
 ## Changelog'as
-* [v0.1]() - Šioje versijoje jau yra realizuotas skaičių atsitiktinis generavimas ir dinaminis pažymių skaičius, kuris buvo 
+* [v0.1](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.1) - Šioje versijoje jau yra realizuotas skaičių atsitiktinis generavimas ir dinaminis pažymių skaičius, kuris buvo 
 įgyvendintas dviem būdais: per C masyvus `main-array.cpp` ir vektorius `main-vector.cpp`.  
 Taip pat šioje versijoje galima pasirinkti per ką skaičiuoti galutinius įvertinimus - **vidurkį** ar **medianą**.
 
