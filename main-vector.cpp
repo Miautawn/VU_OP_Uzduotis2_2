@@ -35,7 +35,7 @@ bool is_digit(string input)
   return 1;
 }
 
-//funkcija, kuri nuskaito tik teigiamą sveikąjį skaičių
+//funkcija, kuri nuskaito tik sveikąjį skaičių ribose
 int input_integer(string text, string err_text, string exit_string, int lower_bound, int upper_bound)
 {
   string input;
