@@ -53,6 +53,23 @@ int input_integer(string text, string err_text, string exit_string, int lower_bo
   }
 }
 
+float calculate_mean(int n, vector<int> grades)
+{
+  float sum = 0;
+  for(int i = 0; i<n; i++) sum+=grades[i];
+  return sum/n;
+}
+
+float calculate_median(int n, vector<int> grades)
+{
+  std::sort(grades.begin(), grades.end());
+
+  //jei nelyginis skaičius namų darbų
+  if(n%2 != 0) return grades[n / 2];
+  //jei lyginis skaičius namų darbų
+  else return ((float)(grades[n / 2] + grades[n / 2 - 1]))/2;
+}
+
 ///////////////////
 //UTILITY FUNKCIJOS
 
@@ -124,21 +141,13 @@ void calculate_final(int grade_num, Student &new_student)
     //skaičiuoti per vidurkį
     if(yes_or_no("\nAr norėtumėte skaičiuoti per vidurkį?\n(jei ne, tai per medianą) "))
     {
-      int sum = 0;
       new_student.is_mean = true;
-      for(int i = 0; i<grade_num; i++) sum+=new_student.grades[i];
-      new_student.mean_or_median = (double)sum/grade_num;
+      new_student.mean_or_median = calculate_mean(grade_num, new_student.grades);
 
     }else //skaičiuoti per medianą
-    {
+    { 
       new_student.is_mean = false;
-      std::sort(new_student.grades.begin(), new_student.grades.end());
-
-      //jei nelyginis skaičius namų darbų
-      if(grade_num%2 != 0) new_student.mean_or_median = new_student.grades[grade_num / 2];
-      //jei lyginis skaičius namų darbų
-      else new_student.mean_or_median = ((double)(new_student.grades[grade_num / 2] + 
-      new_student.grades[grade_num / 2 - 1]))/2;
+      new_student.mean_or_median = calculate_median(grade_num, new_student.grades);
     } 
   } else new_student.mean_or_median = 0; //jeigu pažymių iš ND nebuvo
 
