@@ -54,13 +54,14 @@ int input_integer(string text, string err_text, string exit_string, int lower_bo
 }
 
 //funkcija, kuri padidina masyvą ir prideda elementą
-void increment_array(int *&arr, int size, int number)
+template <typename T1>
+void increment_array(T1 *&arr, int size, T1 element)
 {
-  int *temp = arr;
-  arr = new int[size+1];
+  T1 *temp = arr;
+  arr = new T1[size+1];
 
   for(int i = 0; i<size; i++) arr[i] = temp[i];
-  arr[size] = number;
+  arr[size] = element;
 
   delete [] temp;
 }
@@ -163,8 +164,8 @@ void calculate_final(int grade_num, Student &new_student)
 int main() {
   srand(time(NULL));
 
-  vector <Student> students;
-  students.reserve(10);
+  int array_size = 0;
+  Student *students = new Student[array_size];
 
   while(true)
   {
@@ -182,22 +183,23 @@ int main() {
     else input_grades(grade_num, new_student);
 
     calculate_final(grade_num, new_student);
-    students.push_back(new_student);
+    increment_array(students, array_size, new_student);
+    array_size++;
     cout<<"*************************"<<endl;
   }
 
   //pateikiama ataskaita
-  if(students.size() != 0)
+  if(array_size != 0)
   {
     cout<<"\n"<<endl;
     cout<<"Pavardė        "<<"Vardas         "<<"Galutinis (vid)"<<" / "<<"Galutinis(med)"<<endl;
     cout<<string(60, '-')<<endl;
-    for(auto student : students)
+    for(int i = 0; i<array_size; i++)
     {
-      cout<<std::left<<setw(15)<<student.name;
-      cout<<std::left<<setw(15)<<student.last_name;
-      if(student.is_mean) cout<<setw(15)<<std::fixed<<std::setprecision(2)<<student.final_score<<endl;
-      else cout<<setw(18)<<""<<setw(15)<<std::fixed<<std::setprecision(2)<<student.final_score<<endl;
+      cout<<std::left<<setw(15)<<students[i].name;
+      cout<<std::left<<setw(15)<<students[i].last_name;
+      if(students[i].is_mean) cout<<setw(15)<<std::fixed<<std::setprecision(2)<<students[i].final_score<<endl;
+      else cout<<setw(18)<<""<<setw(15)<<std::fixed<<std::setprecision(2)<<students[i].final_score<<endl;
     }
   }
 
