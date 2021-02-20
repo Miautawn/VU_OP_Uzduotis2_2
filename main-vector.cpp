@@ -12,6 +12,7 @@ struct Student
   double final_score;
 };
 
+
 //UTILITY FUNKCIJOS
 ///////////////////
 
@@ -88,14 +89,16 @@ void get_credentials(Student &new_student)
 //Ši funkcija sugeneruoja pažymius
 void generate_grades(int &n, Student &new_student)
 {
+    RandomInt generator;
     //jeigu vartotojas nepasakė kiek turi būti pažymių
-    if(n == -1) n = rand()%10;
+    if(n == -1) n = generator.rnd(0, 15); 
+
     new_student.grades.reserve(n);
-    for(int i=0; i<n; i++) new_student.grades.push_back(rand()%11);
+    for(int i=0; i<n; i++) new_student.grades.push_back(generator.rnd(0,10));
 
     cout<<"\nBuvo sugeneruoti tokie "<<n<<" ND pažymiai: ";
     for(int grade: new_student.grades) cout<<grade<<" ";
-    new_student.exam_score = rand()%11;
+    new_student.exam_score = generator.rnd(0,10);
     cout<<"\nIr egzamino rezultatas: "<<new_student.exam_score<<endl;
 }
 
@@ -139,7 +142,7 @@ void calculate_final(int grade_num, Student &new_student)
   if(grade_num != 0)
   {
     //skaičiuoti per vidurkį
-    if(yes_or_no("\nAr norėtumėte skaičiuoti per vidurkį?\n(jei ne, tai per medianą) "))
+    if(yes_or_no("\nSkaičiuoti per vidurkį - y, ar medianą - n? "))
     {
       new_student.is_mean = true;
       new_student.mean_or_median = calculate_mean(grade_num, new_student.grades);

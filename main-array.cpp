@@ -12,6 +12,7 @@ struct Student
   double final_score;
 };
 
+
 //UTILITY FUNKCIJOS
 ///////////////////
 
@@ -101,14 +102,16 @@ void get_credentials(Student &new_student)
 //Ši funkcija sugeneruoja pažymius
 void generate_grades(int &n, Student &new_student)
 {
+    RandomInt generator;
     //jeigu vartotojas nepasakė kiek turi būti pažymių
-    if(n == -1) n = rand()%10;
+    if(n == -1) n = generator.rnd(0, 15);
+
     new_student.grades = new int[n];
-    for(int i=0; i<n; i++) new_student.grades[i] = rand()%11;
+    for(int i=0; i<n; i++) new_student.grades[i] = generator.rnd(0, 10);
 
     cout<<"\nBuvo sugeneruoti tokie "<<n<<" ND pažymiai: ";
     for(int i = 0; i<n; i++) cout<<new_student.grades[i]<<" ";
-    new_student.exam_score = rand()%11;
+    new_student.exam_score = generator.rnd(0, 10);
     cout<<"\nIr egzamino rezultatas: "<<new_student.exam_score<<endl;
 }
 
