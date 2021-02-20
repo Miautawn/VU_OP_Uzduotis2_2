@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <iomanip> 
+#include <random>
 
 //dėl lengvesnės sintaksės
 using std::cout;
@@ -14,5 +15,20 @@ using std::endl;
 using std::setw;
 using std::string;
 using std::vector;
+
+
+//Klasė skirta generuoti sveikuosius skaičius
+class RandomInt{
+    public:
+        RandomInt() : mt{rd()} {}
+        int rnd(int low, int high)
+        {
+            std::uniform_int_distribution<int> dist(low, high);
+            return dist(mt);
+        }
+    private:
+        std::random_device rd;
+        std::mt19937 mt;
+};
 
 #endif
