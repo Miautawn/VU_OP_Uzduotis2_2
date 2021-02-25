@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <iomanip> 
 #include <random>
+#include <fstream>
+#include <sys/stat.h>
 
 //dėl lengvesnės sintaksės
 using std::cout;
@@ -15,6 +17,8 @@ using std::endl;
 using std::setw;
 using std::string;
 using std::vector;
+using std::ifstream;
+using std::ofstream;
 
 
 //Klasė skirta generuoti sveikuosius skaičius
