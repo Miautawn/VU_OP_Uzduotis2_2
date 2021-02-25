@@ -14,7 +14,7 @@ Matilda        Anastasija                       8.20
 Taip pat šioje versijoje galima pasirinkti per ką skaičiuoti galutinius įvertinimus - **vidurkį** ar **medianą**.
 * [v0.1.1](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/0.1.1) - Ištaisyta klaida, kur studentai `main-array.cpp` faile buvo laikomi vektoriuje, o ne dinaminiame masyve.
 
-* [v0.2]() - Šioje versijoje realizuota galimybė nuskaityti studentus ir jų duomenis iš tekstinio failo `kursiokai.txt`.  
+* [v0.2](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.2) - Šioje versijoje realizuota galimybė nuskaityti studentus ir jų duomenis iš tekstinio failo `kursiokai.txt`.  
 Patys duomenys turi būti išdėstyti tokia tvarka:
 ```
 Vardas                   Pavarde                    ND1       ND2       ND3       ND4       ND5       ND6       ND7       ND8       ND9      ND10      ND11      ND12      ND13      ND14      ND15      Egz.
