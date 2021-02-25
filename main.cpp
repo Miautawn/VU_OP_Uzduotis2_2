@@ -272,8 +272,6 @@ int main() {
       if(!manual_input) printf("%-15.2f   %.2f \n", student.final_score_mean, student.final_score_median);
       else if(student.is_mean) printf("%.2f \n", student.final_score_mean);
       else printf("%17s %.2f \n", "", student.final_score_median);
-
-      
     }
   }
 }
