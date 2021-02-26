@@ -13,7 +13,7 @@ Matilda        Anastasija                       8.20
 įgyvendintas dviem būdais: per C masyvus `main-array.cpp` ir vektorius `main-vector.cpp`.  
 Taip pat šioje versijoje galima pasirinkti per ką skaičiuoti galutinius įvertinimus - **vidurkį** ar **medianą**.
 * [v0.1.1](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/0.1.1) - Ištaisyta klaida, kur studentai `main-array.cpp` faile buvo laikomi vektoriuje, o ne dinaminiame masyve.
-* [v0.1.2](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/0.1.2) - Ištaisyta klaida, kur `main-array.cpp` faile nebuvo išvalomi dinaminiai masyvai.
+* [v0.1.2](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.1.2) - Ištaisyta klaida, kur `main-array.cpp` faile nebuvo išvalomi dinaminiai masyvai.
 
 * [v0.2](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.2) - Šioje versijoje realizuota galimybė nuskaityti studentus ir jų duomenis iš tekstinio failo `kursiokai.txt`.  
 Patys duomenys turi būti išdėstyti tokia tvarka:
