@@ -9,6 +9,7 @@
 #include <random>
 #include <fstream>
 #include <sys/stat.h>
+#include <chrono>
 
 //dėl lengvesnės sintaksės
 using std::cout;
@@ -19,6 +20,9 @@ using std::string;
 using std::vector;
 using std::ifstream;
 using std::ofstream;
+using std::left;
+using std::right;
+using std::setprecision;
 
 
 //Klasė skirta generuoti sveikuosius skaičius

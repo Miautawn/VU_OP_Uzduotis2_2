@@ -85,14 +85,6 @@ bool file_exists(string name)
 ///////////////////
 //UTILITY FUNKCIJOS
 
-bool student_compare(Student l_student, Student r_student)
-{
-  if(l_student.name < r_student.name) return true;
-  else if(l_student.name == r_student.name && l_student.last_name < r_student.last_name) return true;
-  
-  return false;
-}
-
 //ši funkcija nuskaito studento vardą/pavardę
 void get_credentials(Student &new_student)
 {
@@ -174,14 +166,29 @@ void calculate_final(int grade_num, Student &new_student, bool mean)
   }
 }
 
+void add_read_grade(string grade_temp, Student &student, bool exam)
+{
+  if(is_digit(grade_temp)) {
+    int grade = std::stoi(grade_temp);
+    if(grade >= 0 && grade <= 10) {
+      if(exam) {
+        student.grades.pop_back();
+        student.exam_score = grade;
+      } else student.grades.push_back(grade);
+    } else if (exam) student.exam_score = 0;
+  } else if (exam) student.exam_score = 0;
+}
+
 //ši funkcija nuskaito studentus iš failo
 void read_students_from_file(vector<Student> &students, string file_name, bool &manual_input)
 {
     ifstream input(file_name);
     if(input.is_open()) {
       manual_input = false;
-      string line;
+
+      cout<<"Skaitoma..."<<endl;
       
+      string line;
       getline(input, line);   //praleidžia pirmą eilutę
       while(getline(input, line)) {
          Student new_student;
@@ -192,20 +199,9 @@ void read_students_from_file(vector<Student> &students, string file_name, bool &
 
         //pazymiu skaitymas
         string grade_temp;
-        while(temp >> grade_temp) {
-          if(is_digit(grade_temp)) {
-            int grade = std::stoi(grade_temp);
-            if(grade >= 0 && grade <= 10) new_student.grades.push_back(grade);
-          }
-        }
+        while(temp >> grade_temp) add_read_grade(grade_temp, new_student, false);
         //egzamino rezultato skaitymas
-        if(is_digit(grade_temp)) {
-          int grade = std::stoi(grade_temp);
-          if(grade >= 0 && grade <= 10) {
-            new_student.exam_score = grade;
-            new_student.grades.pop_back();
-          } else new_student.exam_score = 0;
-        } else new_student.exam_score = 0;
+        add_read_grade(grade_temp, new_student, true);
 
         //galutinių balų skaičiavimas
         int grade_num = new_student.grades.size();
@@ -213,13 +209,42 @@ void read_students_from_file(vector<Student> &students, string file_name, bool &
         calculate_final(grade_num, new_student, false); //mediana paremtas galutinis balas
   
         students.push_back(new_student);
-      }
+      } 
     }else {
       cout<<"Įvyko klaida nuskaitant failą,\nJungiamas rankinis įvedimas..."<<endl;
       manual_input = true;
     }
+    input.close();
 }
 
+bool student_compare(Student l_student, Student r_student)
+{
+  return (l_student.last_name == r_student.last_name) ? 
+    l_student.name < r_student.name : 
+    l_student.last_name < r_student.last_name;
+}
+
+void output_read_students(vector<Student> students)
+{
+  //rikiavimas
+  sort(students.begin(), students.end(), student_compare);
+
+  cout<<"Rašoma į failą 'output.txt'..."<<endl;
+  std::ostringstream buffer;
+  buffer<<"Pavardė        Vardas         Galutinis (vid) / Galutinis(med)\n";
+  buffer<<string(60, '-')<<"\n"<<endl;
+
+  for(auto student : students) 
+  buffer<<left<<setw(14)<<setprecision(3)
+        <<student.last_name<<" "<<setw(14)
+        <<student.name<<" "<<setw(15)
+        <<student.final_score_mean<<"   "
+        <<student.final_score_median<<endl;
+
+  ofstream output ("output.txt");
+  output << buffer.str();
+  output.close();
+}
 
 int main() {
   srand(time(NULL));
@@ -230,13 +255,9 @@ int main() {
   string file_name = "kursiokai.txt";
   bool manual_input = true;
   if(file_exists(file_name)) {
-    if(yes_or_no("Ar norėtumėte nuskaityti studentų duomenis iš failo?")) {
+    if(yes_or_no("Ar norėtumėte nuskaityti studentų duomenis iš failo?")) 
     read_students_from_file(students, file_name, manual_input);
-
-    //studentai rikiuojami pagal vardus ar pavardes
-    std::sort(students.begin(), students.end(), student_compare);
-
-    } else cout<<"Jungiamas rankinis įvedinmas...\n"<<endl; 
+    else cout<<"Jungiamas rankinis įvedinmas...\n"<<endl; 
   }
   
   while(manual_input) {
@@ -262,15 +283,15 @@ int main() {
   }
 
   //pateikiama ataskaita
-  if(students.size() != 0) {
+  if(!manual_input) output_read_students(students);
+  else if(students.size() != 0) {
     cout<<"\n"<<endl;
     cout<<"Pavardė        "<<"Vardas         "<<"Galutinis (vid)"<<" / "<<"Galutinis(med)"<<endl;
     cout<<string(60, '-')<<endl;
     for(auto student : students) {
-      printf("%-14.14s ", student.name.c_str());
       printf("%-14.14s ", student.last_name.c_str());
-      if(!manual_input) printf("%-15.2f   %.2f \n", student.final_score_mean, student.final_score_median);
-      else if(student.is_mean) printf("%.2f \n", student.final_score_mean);
+      printf("%-14.14s ", student.name.c_str());
+      if(student.is_mean) printf("%.2f \n", student.final_score_mean);
       else printf("%17s %.2f \n", "", student.final_score_median);
     }
   }
