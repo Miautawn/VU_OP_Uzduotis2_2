@@ -13,11 +13,13 @@ void output_to_console(vector<Student> students) {
     cout<<"\n"<<endl;
     cout<<"Pavardė        "<<"Vardas         "<<"Galutinis (vid)"<<" / "<<"Galutinis(med)"<<endl;
     cout<<string(60, '-')<<endl;
-    for(auto student : students) {
-        printf("%-14.14s ", student.last_name.c_str());
-        printf("%-14.14s ", student.name.c_str());
-        if(student.is_mean) printf("%.2f \n", student.final_score_mean);
-        else printf("%17s %.2f \n", "", student.final_score_median);
+    for(int i = 0; i<students.size(); i++) {
+        try {
+        printf("%-14.14s ", students.at(i).last_name.c_str());
+        printf("%-14.14s ", students.at(i).name.c_str());
+        if(students.at(i).is_mean) printf("%.2f \n", students.at(i).final_score_mean);
+        else printf("%17s %.2f \n", "", students.at(i).final_score_median);
+        } catch(...) { printf("%s \n", "ERROR"); }     
     }
 }
 
@@ -31,13 +33,16 @@ void output_to_file(vector<Student> students) {
     buffer<<"Pavardė        Vardas         Galutinis (vid) / Galutinis(med)\n";
     buffer<<string(60, '-')<<"\n"<<endl;
 
-    for(auto student : students) 
-    buffer<<left<<setw(14)<<setprecision(3)
-        <<student.last_name<<" "<<setw(14)
-        <<student.name<<" "<<setw(15)
-        <<student.final_score_mean<<"   "
-        <<student.final_score_median<<endl;
-
+    for(int i = 0; i<students.size(); i++) {
+        try {
+            buffer<<left<<setw(14)<<setprecision(3)
+            <<students.at(i).last_name<<" "<<setw(14)
+            <<students.at(i).name<<" "<<setw(15)
+            <<students.at(i).final_score_mean<<"   "
+            <<students.at(i).final_score_median<<endl; 
+        } catch(...) { buffer << "ERROR" << endl; };
+    } 
+    
     ofstream output ("output.txt");
     output << buffer.str();
     output.close();

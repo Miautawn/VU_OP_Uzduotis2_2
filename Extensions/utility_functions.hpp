@@ -3,6 +3,7 @@
 
 #include "martyno_lib.hpp"
 #include <sys/stat.h>
+#include <algorithm>
 
 // UTILITY FUNKCIJOS
 ////////////////////

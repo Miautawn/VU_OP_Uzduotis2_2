@@ -8,6 +8,7 @@
 #include "Extensions/input_console.hpp"
 #include "Extensions/input_file.hpp"
 #include "Extensions/output.hpp"
+#include "Extensions/m_exceptions.hpp"
 
 
 

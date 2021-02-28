@@ -15,14 +15,12 @@ void add_read_grade(string grade_temp, Student &student, bool exam)
   } else if (exam) student.exam_score = 0;
 }
 
-void read_students_from_file(vector<Student> &students, string file_name, bool &manual_input)
+void read_students_from_file(vector<Student> &students, string file_name)
 {
     ifstream input(file_name);
-    if(input.is_open()) {
-      manual_input = false;
+    if(input) {
 
       cout<<"Skaitoma..."<<endl;
-      
       string line;
       getline(input, line);   //praleidžia pirmą eilutę
       while(getline(input, line)) {
@@ -45,9 +43,6 @@ void read_students_from_file(vector<Student> &students, string file_name, bool &
   
         students.push_back(new_student);
       } 
-    }else {
-      cout<<"Įvyko klaida nuskaitant failą,\nJungiamas rankinis įvedimas..."<<endl;
-      manual_input = true;
-    }
+    }else throw std::runtime_error("Could not open file");
     input.close();
 }

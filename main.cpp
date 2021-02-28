@@ -7,13 +7,23 @@ int main() {
   students.reserve(10);
   
   string file_name = "kursiokai.txt";
-  bool manual_input = true;
+  bool manual_input = false;
 
   //nuskaitymas iš failo
   if(file_exists(file_name)) {
-    if(yes_or_no("Ar norėtumėte nuskaityti studentų duomenis iš failo?")) 
-    read_students_from_file(students, file_name, manual_input);
-    else cout<<"Jungiamas rankinis įvedinmas...\n"<<endl; 
+    if(yes_or_no("Ar norėtumėte nuskaityti studentų duomenis iš failo?")) {
+
+    try {
+      read_students_from_file(students, file_name);
+      } catch(...) {
+      processException();
+      cout<<"\nJungiamas rankinis rėžimas...\n"<<endl; 
+      }
+    
+    } else {
+      cout<<"Jungiamas rankinis įvedinmas...\n"<<endl; 
+      manual_input = true;
+    }
   }
   
   while(manual_input) {

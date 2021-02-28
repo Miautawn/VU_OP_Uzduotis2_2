@@ -3,6 +3,7 @@
 
 #include "martyno_lib.hpp"
 #include "structures.hpp"
+#include <algorithm>
 
 // Čia funkcijos yra skirtos išvesti rezultatus
 ///////////////////////////////////////////////

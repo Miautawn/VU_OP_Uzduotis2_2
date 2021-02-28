@@ -4,10 +4,9 @@
 // pagrindinių bibliotekų įtraukimas
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <iomanip> 
 #include <fstream>
-#include <chrono>
+
 
 
 //dėl lengvesnės sintaksės
