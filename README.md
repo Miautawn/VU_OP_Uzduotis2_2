@@ -17,6 +17,7 @@ Taip pat šioje versijoje galima pasirinkti per ką skaičiuoti galutinius įver
 
 * [v0.2](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.2) - Šioje versijoje realizuota galimybė nuskaityti studentus ir jų duomenis iš tekstinio failo `kursiokai.txt`.  
 Patys duomenys turi būti išdėstyti tokia tvarka:
+
 ```
 Vardas                   Pavarde                    ND1       ND2       ND3       ND4       ND5       ND6       ND7       ND8       ND9      ND10      ND11      ND12      ND13      ND14      ND15      Egz.
 Vardas1                 Pavarde1                      8         5         8         3         3         7         3        10         2         3         7         5         6         3         5         3
@@ -24,6 +25,10 @@ Vardas2                 Pavarde2                      6         6         5     
 Vardas3                 Pavarde3                      8         3         2         7         7         9         5        10         9         9        10         4         3         3         8         5
 Vardas4                 Pavarde4                      7         9         8         9         6         8         8         8         3         9         5         2         5         5         5         1
 ```
+
+* [v0.3](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.3) - Didelė programos kodo dalis buvo reorganizota ir išskirstyta po failus `Extensions` folderyje. Taip pat buvo implementuota išimčių tvarkymas, kuris turėtų užtikrinti stabilesnį programos veikimą.
+
+
 
 ## Naudojimosi instrukcija
 1. Pasirinkti ar nuskaityti duomenis iš failo `kursiokai.txt`:  
@@ -72,6 +77,15 @@ Pranas         Kaisiadorius   3.12
 
 ## Instaliavimo instrukcija
 Kad pasileisti šią programą reikia atlikti šiuos žingsnius:
-1. Atsisiųsti `main.cpp` failą kartu su `martyno_lib.h` antraščių failu. `kursiokai.txt` neprivalomas.
-2. Sukompiliuoti ir sulinkinti **.exe** failą su savo pageidaujamais įrankiais, kurie palaikytų **C++11**
-3. Pasileisti **.exe** failą ir džiaugtis!
+1. Atsisiųsti visą projekto folderį, tačiau `kursiokai.txt` neprivalomas.
+2. Galima subuild'inti programos paleidžiamąjį failą rankiniu būdu su jūsų pageidaujamais įrankiais,  
+tačiau patariama naudoti `makefile` komandas:
+```shell
+>> make build_all   // subuild'ins viską per vieną kartą
+>> make build       // sulink'ins visus object failus su main.cpp
+>> make compile     // sukompiliuos visus headerių failus
+>> make clean       // išvalys visus object failus
+```
+*P.S ši programa buvo padaryta su **C++11** standartu*  
+
+3. Pasileisti paleidžiamąjį failą!
