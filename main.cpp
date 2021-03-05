@@ -6,25 +6,28 @@ int main() {
   vector <Student> students;
   students.reserve(10);
   
-  string file_name = "kursiokai.txt";
+ 
   bool manual_input = false;
 
   //nuskaitymas iš failo
-  if(file_exists(file_name)) {
     if(yes_or_no("Ar norėtumėte nuskaityti studentų duomenis iš failo?")) {
+
+     string file_name = "";
+     cout<<"\nIveskite failo pavadinimą: ";
+     cin>>file_name;
 
     try {
       read_students_from_file(students, file_name);
       } catch(...) {
       processException();
       cout<<"\nJungiamas rankinis rėžimas...\n"<<endl; 
+      manual_input = true;
       }
-    
+
     } else {
-      cout<<"Jungiamas rankinis įvedinmas...\n"<<endl; 
+      cout<<"\nJungiamas rankinis įvedinmas...\n"<<endl; 
       manual_input = true;
     }
-  }
   
   while(manual_input) {
     if(!yes_or_no("Ar norite pridėti studentą į apskaitą?")) break;
