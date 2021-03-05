@@ -23,8 +23,10 @@ void read_students_from_file(vector<Student> &students, string file_name)
       cout<<"Skaitoma..."<<endl;
       string line;
       getline(input, line);   //praleidžia pirmą eilutę
+
+      Student new_student;
       while(getline(input, line)) {
-         Student new_student;
+        new_student.grades.clear();
 
         //vardu skaitymas
         std::istringstream temp(line);
@@ -43,6 +45,6 @@ void read_students_from_file(vector<Student> &students, string file_name)
   
         students.push_back(new_student);
       } 
-    }else throw std::runtime_error("Could not open file");
+    }else throw std::runtime_error("Could not open file"); 
     input.close();
 }

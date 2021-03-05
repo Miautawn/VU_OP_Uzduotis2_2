@@ -52,10 +52,3 @@ float calculate_median(int n, vector<int> grades)
   else return ((float)(grades[n / 2] + grades[n / 2 - 1]))/2;
 }
 
-bool file_exists(string name)
-{
-  struct stat buffer;
-  return (stat(name.c_str(), &buffer) == 0);
-}
-
-
