@@ -52,3 +52,4 @@ float calculate_median(int n, vector<int> grades)
   else return ((float)(grades[n / 2] + grades[n / 2 - 1]))/2;
 }
 
+

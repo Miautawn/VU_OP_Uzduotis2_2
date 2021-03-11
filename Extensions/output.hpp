@@ -9,6 +9,6 @@
 ///////////////////////////////////////////////
 
 //universali išvedimo funkcija
-void output_students(vector<Student> students, bool to_file);
+void output_students(vector<Student> students, bool to_file, string file_name = "output.txt", bool log = true);
 
 #endif

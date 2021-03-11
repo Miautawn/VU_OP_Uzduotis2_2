@@ -1,16 +1,20 @@
 #include "main.hpp"
 
 int main() {
-  srand(time(NULL));
+  
+  //benchmarkas
+  if(yes_or_no("Ar norėtumėte atlikti programos 'benchmark'ą'?")) {
+    student_benchmark();
+    exit(0);
+  } else cout<<endl;
 
+  srand(time(NULL));
   vector <Student> students;
   students.reserve(10);
-  
- 
   bool manual_input = false;
 
   //nuskaitymas iš failo
-    if(yes_or_no("Ar norėtumėte nuskaityti studentų duomenis iš failo?")) {
+  if(yes_or_no("Ar norėtumėte nuskaityti studentų duomenis iš failo?")) {
 
      string file_name = "";
      cout<<"\nIveskite failo pavadinimą: ";
@@ -18,16 +22,17 @@ int main() {
 
     try {
       read_students_from_file(students, file_name);
-      } catch(...) {
+    } catch(...) {
       processException();
       cout<<"\nJungiamas rankinis rėžimas...\n"<<endl; 
       manual_input = true;
-      }
-
-    } else {
+    }
+  } else {
       cout<<"\nJungiamas rankinis įvedinmas...\n"<<endl; 
       manual_input = true;
-    }
+  }
+
+
   
   while(manual_input) {
     if(!yes_or_no("Ar norite pridėti studentą į apskaitą?")) break;
