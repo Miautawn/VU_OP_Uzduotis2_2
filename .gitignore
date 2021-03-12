@@ -1,1 +1,3 @@
-bench_temp.txt
+bench*.txt
+output.txt
+program
