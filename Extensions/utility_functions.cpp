@@ -44,12 +44,13 @@ float calculate_mean(int n, vector<int> grades)
 
 float calculate_median(int n, vector<int> grades)
 {
-  std::sort(grades.begin(), grades.end());
-
-  //jei nelyginis skaičius namų darbų
-  if(n%2 != 0) return grades[n / 2];
-  //jei lyginis skaičius namų darbų
-  else return ((float)(grades[n / 2] + grades[n / 2 - 1]))/2;
+  if(grades.size() != 0) {
+    std::sort(grades.begin(), grades.end());
+    //jei nelyginis skaičius namų darbų
+    if(n%2 != 0) return grades[n / 2];
+    //jei lyginis skaičius namų darbų
+    else return ((float)(grades[n / 2] + grades[n / 2 - 1]))/2;
+  } else return 0;
 }
 
 
