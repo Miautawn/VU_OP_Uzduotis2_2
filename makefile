@@ -30,4 +30,4 @@ compile_all:
 	Extensions/timer.cpp -O2
 
 clean:
-	rm *.o
+	rm *.o bench* Benchmark/*

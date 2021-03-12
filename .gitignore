@@ -1,4 +1,5 @@
 bench*.txt
+Benchmark/*
 output.txt
 *.o
 program
