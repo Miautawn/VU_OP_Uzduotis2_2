@@ -24,11 +24,11 @@ void output_to_console(vector<Student> students) {
 }
 
 //išvedimas į failą
-void output_to_file(vector<Student> students) {
+void output_to_file(vector<Student> students, string file_name, bool log) {
     //rikiavimas
     sort(students.begin(), students.end(), student_compare);
 
-    cout<<"Rašoma į failą 'output.txt'..."<<endl;
+    if(log) cout<<"Rašoma į failą "<<"'"<<file_name<<"'"<<" ..."<<endl;
     std::ostringstream buffer;
     buffer<<"Pavardė        Vardas         Galutinis (vid) / Galutinis(med)\n";
     buffer<<string(60, '-')<<"\n"<<endl;
@@ -43,15 +43,15 @@ void output_to_file(vector<Student> students) {
         } catch(...) { buffer << "ERROR" << endl; };
     } 
     
-    ofstream output ("output.txt");
+    ofstream output(file_name);
     output << buffer.str();
     output.close();
 }
 
 // pagrindinė išvedimo funkcija
-void output_students(vector<Student> students, bool to_file) {
+void output_students(vector<Student> students, bool to_file, string file_name, bool log) {
     if(students.size() != 0) {
-        if(to_file) output_to_file(students);
+        if(to_file) output_to_file(students, file_name, log);
         else output_to_console(students);
     }
 }

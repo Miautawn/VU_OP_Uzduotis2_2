@@ -15,8 +15,9 @@ Taip pat šioje versijoje galima pasirinkti per ką skaičiuoti galutinius įver
 * [v0.1.1](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/0.1.1) - Ištaisyta klaida, kur studentai `main-array.cpp` faile buvo laikomi vektoriuje, o ne dinaminiame masyve.
 * [v0.1.2](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.1.2) - Ištaisyta klaida, kur `main-array.cpp` faile nebuvo išvalomi dinaminiai masyvai.
 
-* [v0.2](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.2) - Šioje versijoje realizuota galimybė nuskaityti studentus ir jų duomenis iš tekstinio failo `kursiokai.txt`.  
-Patys duomenys turi būti išdėstyti tokia tvarka:
+* [v0.2](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.2) - Šioje versijoje realizuota galimybė nuskaityti studentus ir jų duomenis iš tekstinio failo `kursiokai.txt`, kurio duomenys turi būti išdėstyti tokia tvarka:
+
+  **SVARBU!!!** [v0.3](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.3) versijoje ši funkcija buvo pakeista taip, kad vartotojas gali pats įvesti duomenų failo pavadinimą.
 
 ```
 Vardas                   Pavarde                    ND1       ND2       ND3       ND4       ND5       ND6       ND7       ND8       ND9      ND10      ND11      ND12      ND13      ND14      ND15      Egz.
@@ -27,48 +28,53 @@ Vardas4                 Pavarde4                      7         9         8     
 ```
 
 * [v0.3](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.3) - Didelė programos kodo dalis buvo reorganizota ir išskirstyta po failus `Extensions` folderyje. Taip pat buvo implementuota išimčių tvarkymas, kuris turėtų užtikrinti stabilesnį programos veikimą.
+* [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4) - Šioje versijoje buvo realizuota "benchmark" funkcija, kuri išmatuos programos veikimo laiką per keletą testų su skirtingais įrašų kiekiais.
 
 
 
 ## Naudojimosi instrukcija
-1. Pasirinkti ar nuskaityti duomenis iš failo `kursiokai.txt`:  
-*P.S.* Šio pasirinkimo nebus, jei `kursiokai.txt` nebus rastas paleidimo foldery.
+1. Pasirinkti ar norima atlikti "benchmark'ą":
 ```shell
->> Ar norėtumėte nuskaityti studentų duomenis iš failo? y/n:
+>> Ar norėtumėte atlikti programos 'benchmark'ą'? y/n:
 ```
-2. Jei ne, pridėti studentą įrašant '*y*'  
+2. Pasirinkti ar nuskaityti duomenis iš failo, ir įvesti failo pavadinimą jei taip:  
+```shell
+>> Ar norėtumėte nuskaityti studentų duomenis iš failo? y/n: y
+>> Iveskite failo pavadinimą: file-name.txt
+```
+3. Jei ne, pridėti studentą įrašant '*y*'  
 ```shell
 >> Ar norite pridėti studentą į apskaitą? y/n: y
 ```
-3. Įvesti vardą ir pavardę  
+4. Įvesti vardą ir pavardę  
 ```shell
 >> Prašoma įrašyti studento
 >> vardą: Pranas
 >> pavardę: Kaisiadorius
 ```
-4. Pasirinkti ar įvesti pažymių skaičių iš anksto 
+5. Pasirinkti ar įvesti pažymių skaičių iš anksto 
 ```shell
 >> Ar žinote kiek studentas turi pažymių už ND, y/n: y
 >> Kiek (0, 50): 5
 ```
-5. Pasirinkti ar norite atsitiktinai sugeneruoti skaičius
+6. Pasirinkti ar norite atsitiktinai sugeneruoti skaičius
 ```shell
 >> Ar norėtumėte atsitiktinai sugeneruoti pažymius? y/n: y
 ```
-6. Atitinkamai nuo pasirinkimų: įvesti pažymius arba pažiūrėti kas buvo sugeneruota
+7. Atitinkamai nuo pasirinkimų: įvesti pažymius arba pažiūrėti kas buvo sugeneruota
 ```shell
 >> Buvo sugeneruoti tokie 5 ND pažymiai: 8 7 3 1 5 
 >> Ir egzamino rezultatas: 2
 ```
-7. Pasirinkti ar galutinį balą skaičiuoti pagal vidurkį ar medianą
+8. Pasirinkti ar galutinį balą skaičiuoti pagal vidurkį ar medianą
 ```shell
 >> Skaičiuoti per vidurkį - y, ar medianą - n?  y/n: y
 ```
-8. Jei norite gauti ataskaitą, įveskite '*n*'
+9. Jei norite gauti ataskaitą, įveskite '*n*'
 ```shell
 >> Ar norite pridėti studentą į apskaitą? y/n: n
 ```
-9. Viskas!
+10. Viskas!
 ```shell
 Pavardė        Vardas         Galutinis (vid) / Galutinis(med)
 ------------------------------------------------------------
@@ -81,10 +87,11 @@ Kad pasileisti šią programą reikia atlikti šiuos žingsnius:
 2. Galima subuild'inti programos paleidžiamąjį failą rankiniu būdu su jūsų pageidaujamais įrankiais,  
 tačiau patariama naudoti `makefile` komandas:
 ```shell
->> make build_all   // subuild'ins viską per vieną kartą
->> make build       // sulink'ins visus object failus su main.cpp
->> make compile     // sukompiliuos visus headerių failus
->> make clean       // išvalys visus object failus
+
+>> make build         // subuild'ins viską per vieną kartą
+>> make build_all     // sulink'ins visus object failus su main.cpp
+>> make compile_all   // sukompiliuos visus headerių failus
+>> make clean         // išvalys visus object failus
 ```
 *P.S ši programa buvo padaryta su **C++11** standartu*  
 

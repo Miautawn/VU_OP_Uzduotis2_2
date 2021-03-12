@@ -15,12 +15,12 @@ void add_read_grade(string grade_temp, Student &student, bool exam)
   } else if (exam) student.exam_score = 0;
 }
 
-void read_students_from_file(vector<Student> &students, string file_name)
+void read_students_from_file(vector<Student> &students, string file_name, bool log)
 {
     ifstream input(file_name);
     if(input) {
 
-      cout<<"Skaitoma..."<<endl;
+      if(log) cout<<"Skaitoma..."<<endl;
       string line;
       getline(input, line);   //praleidžia pirmą eilutę
 

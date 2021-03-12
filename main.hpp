@@ -10,6 +10,4 @@
 #include "Extensions/output.hpp"
 #include "Extensions/m_exceptions.hpp"
 
-
-
 #endif

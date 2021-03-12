@@ -5,12 +5,17 @@
 #include "structures.hpp"
 #include "random_generator.h"
 #include "utility_functions.hpp"
+#include "output.hpp"
+#include "input_file.hpp"
+#include "timer.h"
 
 // Šios funkcijos yra skirtos dirbti su studentų duomenimis ir yra labai specifinės
 ///////////////////////////////////////////////////////////////////////////////////
 
-void generate_grades(int &n, Student &new_student); //sugeneruoja pažymius
+void generate_grades(int &n, Student &new_student, bool log = true); //sugeneruoja pažymius
 void calculate_final(int grade_num, Student &new_student, bool is_mean); //suskaičiuoja galutinį balą
 
+//ši funkcija atlkits programos benchmarką
+void student_benchmark();
 
 #endif
