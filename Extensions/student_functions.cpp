@@ -70,9 +70,18 @@ void student_benchmark_generate_file(int n)
   }
 
   //išvedimas mūsų benchmark failo
-  ofstream output("bench_temp.txt");
+  string file_name = "bench_temp" + std::to_string(n) + ".txt";
+  ofstream output(file_name);
   output << buffer.str();
   output.close();  
+}
+
+double split_time(Timer &timer, double &full_time)
+{
+  double split = timer.current_time();
+  timer.reset();
+  full_time += split;
+  return split;
 }
 
 void student_benchmark()
@@ -80,27 +89,27 @@ void student_benchmark()
   int stages[5] = {1000, 10000, 100000, 1000000, 10000000};
   vector<Student> bench_students;
   Timer m_timer;
+  double full_time;
   for(int stage_index = 0; stage_index < 5; stage_index++) {
 
     cout<<"\n***************************";
     cout<<"\nPradedamas tikrinimas su "<<stages[stage_index]<<" studentų..."<<endl;
+    full_time = 0;
     m_timer.reset();
     bench_students.reserve(stages[stage_index]);
 
     //failo kūrimas
     student_benchmark_generate_file(stages[stage_index]);
     cout<<stages[stage_index]<<" studentų generavimas ir failo kūrimas užtruko: "
-    <<m_timer.current_time()<<endl;
-    m_timer.reset();
+    <<split_time(m_timer, full_time)<<endl;
 
     //failo nuskaitymas
-    read_students_from_file(bench_students, "bench_temp.txt", false);
+    read_students_from_file(bench_students, 
+    "bench_temp" + std::to_string(stages[stage_index]) + ".txt", false);
     cout<<stages[stage_index]<<" studentų skaitymas iš failo užtruko: "
-    <<m_timer.current_time()<<endl;
-    m_timer.reset();
+    <<split_time(m_timer, full_time)<<endl;
     
     //studentų rūšiavimas į dvi grupes:
-
     //1) surušiavimas didėjimo tvarka
     std::sort(bench_students.begin(), bench_students.end(), 
     [](const Student &l_student, const Student &r_student) {
@@ -113,20 +122,22 @@ void student_benchmark()
       return l_student.final_score_mean < value;
     });
     cout<<stages[stage_index]<<" studentų skirstymas užtruko: "
-    <<m_timer.current_time()<<endl;
-    m_timer.reset();
+    <<split_time(m_timer, full_time)<<endl;
 
     //kietakų išvedimas į failą
-    output_students( {first_good_student, bench_students.end()}, true, "bench_kietuoliai.txt", false);
+    string local_file = "Benchmark/bench_kietuoliai" + std::to_string(stages[stage_index]) + ".txt";
+    output_students( {first_good_student, bench_students.end()}, true, local_file, false);
     cout<<stages[stage_index]<<" Įrašų 'kietuolių' išvedimas į failą užtruko: "
-    <<m_timer.current_time()<<endl;
-    m_timer.reset();
+    <<split_time(m_timer, full_time)<<endl;
 
     //nabagėlių išvedimas į failą
-    output_students( {bench_students.begin(), first_good_student}, true, "bench_varguoliai.txt", false);
+    local_file = "Benchmark/bench_varguoliai" + std::to_string(stages[stage_index]) + ".txt";
+    output_students( {bench_students.begin(), first_good_student}, true, local_file, false);
     cout<<stages[stage_index]<<" Įrašų 'varguolių' išvedimas į failą užtruko: "
-    <<m_timer.current_time()<<endl;
-    m_timer.reset();
+    <<split_time(m_timer, full_time)<<endl;
+
+    //galutinio laiko išrašymas
+    cout<<stages[stage_index]<<" VISAS TESTAS UŽTRUKO: "<<full_time<<endl;
 
     if(stage_index != 4) {
       if(!yes_or_no("Ar norite testi?")) break;

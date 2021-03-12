@@ -1,4 +1,6 @@
 bench*.txt
+Benchmark/*
+!Benchmark/.gitkeep
 output.txt
 *.o
 program
