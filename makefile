@@ -7,7 +7,7 @@ build:
 	Extensions/student_functions.cpp \
 	Extensions/input_console.cpp \
 	Extensions/m_exceptions.cpp \
-	Extensions/timer.cpp
+	Extensions/timer.cpp -O2
 
 build_all:
 	g++ -o program main.cpp \
@@ -27,7 +27,7 @@ compile_all:
 	Extensions/student_functions.cpp \
 	Extensions/input_console.cpp \
 	Extensions/m_exceptions.cpp \
-	Extensions/timer.cpp
+	Extensions/timer.cpp -O2
 
 clean:
 	rm *.o
