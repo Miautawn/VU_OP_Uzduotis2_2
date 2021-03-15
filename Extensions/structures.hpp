@@ -1,7 +1,6 @@
 #ifndef STRUCTURES_HPP
 #define STRUCTURES_HPP
 
-
 // Čia yra pagrindinė duomenų struktūra
 ///////////////////////////////////////
 

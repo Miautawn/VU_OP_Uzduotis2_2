@@ -18,18 +18,18 @@ bool is_digit(string input)
   return 1;
 }
 
-int input_integer(string text, string err_text, string exit_string, int lower_bound, int upper_bound)
+int input_integer(string text, string err_text, int lower_bound, int upper_bound, string exit_string)
 {
   string input;
   cout<<text;
   while(true)
   {
     cin>>input;
-    if(is_digit(input))
-    {
+    if (input == exit_string) return -1;
+    if(is_digit(input)) {
       int number = std::stoi(input);
       if(number >= lower_bound && number <= upper_bound) return number;
-    } else if (input == exit_string) return -1; 
+    }
     //jeigu neatitiko sąlygų
     cout<<err_text;
   }

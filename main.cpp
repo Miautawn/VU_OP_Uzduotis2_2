@@ -4,8 +4,20 @@ int main() {
   
   //benchmarkas
   if(yes_or_no("Ar norėtumėte atlikti programos 'benchmark'ą'?")) {
-    student_benchmark();
-    exit(0);
+
+    //gaunamas konteinerio pasirinkimas
+    int container_code = input_integer(
+      "\nSu kuriuo konteineriu atlikti testą?"
+      "\n1) Vektor"
+      "\n2) List"
+      "\n3) Deque"
+      "\n4) Atšaukti"
+      "\nĮveskite pasirinkimą: ",
+      "Klaida, bandykite vėl: ", 1, 4);
+
+    if(container_code != 4) {  
+      exit(0);
+    }else cout<<"Atšaukiamas benchmark'as...\n"<<endl;
   } else cout<<endl;
 
   srand(time(NULL));
@@ -42,7 +54,7 @@ int main() {
 
     int grade_num = -1;
     if(yes_or_no("Ar žinote kiek studentas turi pažymių už ND,"))
-    grade_num = input_integer("Kiek (0, 50): ","Įveskite ne neigiamą skaičių: ", "0", 0, 50);
+    grade_num = input_integer("Kiek (0, 50): ","Įveskite ne neigiamą skaičių: ", 0, 50);
 
     if(yes_or_no("Ar norėtumėte atsitiktinai sugeneruoti pažymius?"))
     generate_grades(grade_num, new_student);
