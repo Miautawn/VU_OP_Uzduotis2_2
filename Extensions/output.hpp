@@ -3,12 +3,14 @@
 
 #include "martyno_lib.hpp"
 #include "structures.hpp"
+#include "utility_functions.hpp"
 #include <algorithm>
 
 // Čia funkcijos yra skirtos išvesti rezultatus
 ///////////////////////////////////////////////
 
 //universali išvedimo funkcija
-void output_students(vector<Student> students, bool to_file, string file_name = "output.txt", bool log = true);
+template <class Container>
+void output_students(Container students, bool to_file, string file_name = "output.txt", bool log = true);
 
 #endif

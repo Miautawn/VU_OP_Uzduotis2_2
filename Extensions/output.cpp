@@ -9,24 +9,30 @@ bool student_compare(Student l_student, Student r_student)
 }
 
 //išvedimas į konsolę
-void output_to_console(vector<Student> students) {
+template <class Container>
+void output_to_console(Container students) {
+    
+    typename Container::iterator iter = students.begin();
     cout<<"\n"<<endl;
     cout<<"Pavardė        "<<"Vardas         "<<"Galutinis (vid)"<<" / "<<"Galutinis(med)"<<endl;
     cout<<string(60, '-')<<endl;
     for(int i = 0; i<students.size(); i++) {
         try {
-        printf("%-14.14s ", students.at(i).last_name.c_str());
-        printf("%-14.14s ", students.at(i).name.c_str());
-        if(students.at(i).is_mean) printf("%.2f \n", students.at(i).final_score_mean);
-        else printf("%17s %.2f \n", "", students.at(i).final_score_median);
+        printf("%-14.14s ", (*iter).last_name.c_str());
+        printf("%-14.14s ", (*iter).name.c_str());
+        if((*iter).is_mean) printf("%.2f \n", (*iter).final_score_mean);
+        else printf("%17s %.2f \n", "", (*iter).final_score_median);
         } catch(...) { printf("%s \n", "ERROR"); }     
+        ++iter;
     }
 }
 
 //išvedimas į failą
-void output_to_file(vector<Student> students, string file_name, bool log) {
+template <class Container>
+void output_to_file(Container students, string file_name, bool log) {
     //rikiavimas
-    sort(students.begin(), students.end(), student_compare);
+    sort_container(students);
+    typename Container::iterator iter = students.begin();
 
     if(log) cout<<"Rašoma į failą "<<"'"<<file_name<<"'"<<" ..."<<endl;
     std::ostringstream buffer;
@@ -36,11 +42,12 @@ void output_to_file(vector<Student> students, string file_name, bool log) {
     for(int i = 0; i<students.size(); i++) {
         try {
             buffer<<left<<setw(14)<<setprecision(3)
-            <<students.at(i).last_name<<" "<<setw(14)
-            <<students.at(i).name<<" "<<setw(15)
-            <<students.at(i).final_score_mean<<"   "
-            <<students.at(i).final_score_median<<endl; 
+            <<(*iter).last_name<<" "<<setw(14)
+            <<(*iter).name<<" "<<setw(15)
+            <<(*iter).final_score_mean<<"   "
+            <<(*iter).final_score_median<<endl; 
         } catch(...) { buffer << "ERROR" << endl; };
+        ++iter;
     } 
     
     ofstream output(file_name);
@@ -49,10 +56,17 @@ void output_to_file(vector<Student> students, string file_name, bool log) {
 }
 
 // pagrindinė išvedimo funkcija
-void output_students(vector<Student> students, bool to_file, string file_name, bool log) {
+template <class Container>
+void output_students(Container students, bool to_file, string file_name, bool log) {
     if(students.size() != 0) {
         if(to_file) output_to_file(students, file_name, log);
         else output_to_console(students);
     }
 }
+
+
+
+template void output_students(vector<Student> students, bool to_file, string file_name, bool log);
+template void output_students(list<Student> students, bool to_file, string file_name, bool log);
+template void output_students(deque<Student> students, bool to_file, string file_name, bool log);
 

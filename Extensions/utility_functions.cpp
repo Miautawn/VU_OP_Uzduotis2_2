@@ -54,3 +54,16 @@ float calculate_median(int n, vector<int> grades)
 }
 
 
+template <class Container>
+void sort_container(Container &students) {
+  std::sort(students.begin(), students.end());
+}
+
+template <>
+void sort_container(list<Student> &students) {
+  students.sort();
+}
+
+
+template void sort_container(vector<Student> &students);
+template void sort_container(deque<Student> &students);

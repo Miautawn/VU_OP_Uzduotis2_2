@@ -15,7 +15,11 @@ int main() {
       "\nĮveskite pasirinkimą: ",
       "Klaida, bandykite vėl: ", 1, 4);
 
-    if(container_code != 4) {  
+    if(container_code != 4) {
+      switch(container_code) {
+        case 1 : student_benchmark(vector<Student> (), "VECTOR"); break;
+        case 2 : student_benchmark(list<Student> (), "LIST"); break;
+        case 3 : student_benchmark(deque<Student> (), "DEQUE"); break;}
       exit(0);
     }else cout<<"Atšaukiamas benchmark'as...\n"<<endl;
   } else cout<<endl;
