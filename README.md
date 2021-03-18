@@ -28,17 +28,26 @@ Vardas4                 Pavarde4                      7         9         8     
 ```
 
 * [v0.3](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.3) - Didelė programos kodo dalis buvo reorganizota ir išskirstyta po failus `Extensions` folderyje. Taip pat buvo implementuota išimčių tvarkymas, kuris turėtų užtikrinti stabilesnį programos veikimą.
+* 
 * [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4) - Šioje versijoje buvo realizuota "benchmark" funkcija, kuri išmatuos programos veikimo laiką per keletą testų su skirtingais įrašų kiekiais.
 * [v0.4.1](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4.1) - Šioje versijoje buvo pamodifikuota "benchmark" implementacija taip, kad studentų grupių failai būtų generuojami į `Benchmark` folderį.
+* 
+* [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) - Šioje versijoje buco patobulinta 'benchmark' funkcija iš [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4.1) versijos. Dabar galima atlikti testą su vienu iš trijų duomenų konteinerių: [`vector`, `list`, `deque`] 
 
 
 
 ## Naudojimosi instrukcija
-1. Pasirinkti ar norima atlikti "benchmark'ą":
+1. Pasirinkti ar norima atlikti "benchmark'ą" ir su kokiu konteineriu, jei taip:
 ```shell
->> Ar norėtumėte atlikti programos 'benchmark'ą'? y/n:
+>> Ar norėtumėte atlikti programos 'benchmark'ą'? y/n: y
+>> Su kuriuo konteineriu atlikti testą?
+     1) Vektor"
+     2) List"
+     3) Deque"
+     4) Atšaukti"
+     Įveskite pasirinkimą:
 ```
-2. Pasirinkti ar nuskaityti duomenis iš failo, ir įvesti failo pavadinimą jei taip:  
+2. Pasirinkti ar nuskaityti duomenis iš failo ir įvesti failo pavadinimą, jei taip:  
 ```shell
 >> Ar norėtumėte nuskaityti studentų duomenis iš failo? y/n: y
 >> Iveskite failo pavadinimą: file-name.txt
