@@ -5,6 +5,7 @@
 #include "structures.hpp"
 #include <sys/stat.h>
 #include <algorithm>
+#include <numeric>
 
 // UTILITY FUNKCIJOS
 ////////////////////

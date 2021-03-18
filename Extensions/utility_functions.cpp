@@ -1,5 +1,15 @@
 #include "utility_functions.hpp"
 
+template <class Container>
+void sort_container(Container &students) {
+  std::sort(students.begin(), students.end());
+}
+
+template <>
+void sort_container(list<Student> &students) {
+  students.sort();
+}
+
 bool yes_or_no(string text)
 {
   string option;
@@ -37,31 +47,18 @@ int input_integer(string text, string err_text, int lower_bound, int upper_bound
 
 float calculate_mean(int n, vector<int> grades)
 {
-  float sum = 0;
-  for(int i = 0; i<n; i++) sum+=grades[i];
-  return sum/n;
+  return std::accumulate(grades.begin(), grades.end(), 0) / n;
 }
 
 float calculate_median(int n, vector<int> grades)
 {
   if(grades.size() != 0) {
-    std::sort(grades.begin(), grades.end());
+    sort_container(grades);
     //jei nelyginis skaičius namų darbų
     if(n%2 != 0) return grades[n / 2];
     //jei lyginis skaičius namų darbų
     else return ((float)(grades[n / 2] + grades[n / 2 - 1]))/2;
   } else return 0;
-}
-
-
-template <class Container>
-void sort_container(Container &students) {
-  std::sort(students.begin(), students.end());
-}
-
-template <>
-void sort_container(list<Student> &students) {
-  students.sort();
 }
 
 
