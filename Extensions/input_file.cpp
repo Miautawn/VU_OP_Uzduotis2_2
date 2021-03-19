@@ -21,6 +21,7 @@ void read_students_from_file(Container &students, string file_name, bool log)
     ifstream input(file_name);
     if(input) {
 
+      Timer m_timer;
       if(log) cout<<"Skaitoma..."<<endl;
       string line;
       getline(input, line);   //praleidžia pirmą eilutę

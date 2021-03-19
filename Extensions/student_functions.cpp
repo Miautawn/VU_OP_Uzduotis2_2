@@ -77,15 +77,6 @@ void student_benchmark_generate_file(int n)
 }
 
 
-double split_time(Timer &timer, double &full_time)
-{
-  double split = timer.current_time();
-  timer.reset();
-  full_time += split;
-  return split;
-}
-
-
 template <class Container>
 void student_benchmark(Container bench_students, string container_code)
 {
@@ -103,19 +94,19 @@ void student_benchmark(Container bench_students, string container_code)
     //failo kūrimas
     student_benchmark_generate_file(stages[stage_index]);
     cout<<stages[stage_index]<<" studentų generavimas ir failo kūrimas užtruko: "
-    <<split_time(m_timer, full_time)<<endl;
+    <<m_timer.split_time(full_time)<<endl;
 
     //failo nuskaitymas
     read_students_from_file(bench_students, 
     "bench_temp" + std::to_string(stages[stage_index]) + ".txt", false);
-    cout<<stages[stage_index]<<" studentų skaitymas iš failo užtruko: "
-    <<split_time(m_timer, full_time)<<endl;
+    cout<<stages[stage_index]<<" studentų nuskaitymas užtruko: "
+    <<m_timer.split_time(full_time)<<endl;
     
     //studentų rūšiavimas į dvi grupes:
     //1) surušiavimas didėjimo tvarka
     sort_container(bench_students);
     cout<<stages[stage_index]<<" studentų surūšiavimas didėjimo tvarka užtruko: "
-    <<split_time(m_timer, full_time)<<endl;
+    <<m_timer.split_time(full_time)<<endl;
 
     //2) pirmo >= 5 radimas
     typename Container::iterator first_good_student = 
@@ -124,29 +115,29 @@ void student_benchmark(Container bench_students, string container_code)
       return l_student.final_score_mean < value;
     });
     cout<<stages[stage_index]<<" Grupių ribos radimas užtruko: "
-    <<split_time(m_timer, full_time)<<endl;
+    <<m_timer.split_time(full_time)<<endl;
 
     //kietaku "kopijavimas"
     Container kietuoliai {first_good_student, bench_students.end()};
     cout<<stages[stage_index]<<" Įrašų 'kietuolių' kopijavimas užtruko: "
-    <<split_time(m_timer, full_time)<<endl;
+    <<m_timer.split_time(full_time)<<endl;
 
     //Varguoliu "kopijavimas"
     Container varguoliai {bench_students.begin(), first_good_student};
     cout<<stages[stage_index]<<" Įrašų 'varguolių' kopijavimas užtruko: "
-    <<split_time(m_timer, full_time)<<endl;
+    <<m_timer.split_time(full_time)<<endl;
 
     //kietakų išvedimas į failą
     string local_file = "Benchmark/bench_kietuoliai" + std::to_string(stages[stage_index]) + ".txt";
     output_students(kietuoliai, true, local_file, false);
     cout<<stages[stage_index]<<" Įrašų 'kietuolių' išvedimas į failą užtruko: "
-    <<split_time(m_timer, full_time)<<endl;
+    <<m_timer.split_time(full_time)<<endl;
 
     //nabagėlių išvedimas į failą
     local_file = "Benchmark/bench_varguoliai" + std::to_string(stages[stage_index]) + ".txt";
     output_students(varguoliai, true, local_file, false);
     cout<<stages[stage_index]<<" Įrašų 'varguolių' išvedimas į failą užtruko: "
-    <<split_time(m_timer, full_time)<<endl;
+    <<m_timer.split_time(full_time)<<endl;
 
     //galutinio laiko išrašymas
     cout<<stages[stage_index]<<" VISAS TESTAS UŽTRUKO: "<<full_time<<endl;

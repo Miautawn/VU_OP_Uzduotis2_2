@@ -14,6 +14,7 @@ class Timer
         Timer();
         void reset();
         double current_time();
+        double split_time(double &full_time);
 
 };
 #endif
