@@ -16,6 +16,7 @@ void generate_grades(int &n, Student &new_student, bool log = true); //sugeneruo
 void calculate_final(int grade_num, Student &new_student, bool is_mean); //suskaičiuoja galutinį balą
 
 //ši funkcija atlkits programos benchmarką
-void student_benchmark();
+template <class Container>
+void student_benchmark(Container bench_students, string container_code);
 
 #endif

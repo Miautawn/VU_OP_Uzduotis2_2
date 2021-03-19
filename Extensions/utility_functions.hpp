@@ -2,8 +2,10 @@
 #define UTILITY_FUNCTIONS_HPP
 
 #include "martyno_lib.hpp"
+#include "structures.hpp"
 #include <sys/stat.h>
 #include <algorithm>
+#include <numeric>
 
 // UTILITY FUNKCIJOS
 ////////////////////
@@ -14,6 +16,12 @@ float calculate_mean(int n, vector<int> grades); //suskaičiuoja vidurkį
 float calculate_median(int n, vector<int> grades); //suskaičiuoja medianą
 
 //funkcija, kuri nuskaito tik sveikąjį skaičių ribose
-int input_integer(string text, string err_text, string exit_string, int lower_bound, int upper_bound);
+int input_integer(string text, string err_text, int lower_bound, int upper_bound, string exit_string = "");
+
+//funkcija kuri patikrina ar failas su tokiu vardu egzistuoja
+bool files_exists(const string &name);
+
+template <class Container>
+void sort_container(Container &students);
 
 #endif

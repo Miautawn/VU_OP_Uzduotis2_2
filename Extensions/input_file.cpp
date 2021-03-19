@@ -15,11 +15,13 @@ void add_read_grade(string grade_temp, Student &student, bool exam)
   } else if (exam) student.exam_score = 0;
 }
 
-void read_students_from_file(vector<Student> &students, string file_name, bool log)
+template <class Container>
+void read_students_from_file(Container &students, string file_name, bool log)
 {
     ifstream input(file_name);
     if(input) {
 
+      Timer m_timer;
       if(log) cout<<"Skaitoma..."<<endl;
       string line;
       getline(input, line);   //praleidžia pirmą eilutę
@@ -48,3 +50,7 @@ void read_students_from_file(vector<Student> &students, string file_name, bool l
     }else throw std::runtime_error("Could not open file"); 
     input.close();
 }
+
+template void read_students_from_file(vector<Student> &students, string file_name, bool log);
+template void read_students_from_file(list<Student> &students, string file_name, bool log);
+template void read_students_from_file(deque<Student> &students, string file_name, bool log);

@@ -1,5 +1,15 @@
 #include "utility_functions.hpp"
 
+template <class Container>
+void sort_container(Container &students) {
+  std::sort(students.begin(), students.end());
+}
+
+template <>
+void sort_container(list<Student> &students) {
+  students.sort();
+}
+
 bool yes_or_no(string text)
 {
   string option;
@@ -18,18 +28,18 @@ bool is_digit(string input)
   return 1;
 }
 
-int input_integer(string text, string err_text, string exit_string, int lower_bound, int upper_bound)
+int input_integer(string text, string err_text, int lower_bound, int upper_bound, string exit_string)
 {
   string input;
   cout<<text;
   while(true)
   {
     cin>>input;
-    if(is_digit(input))
-    {
+    if (input == exit_string) return -1;
+    if(is_digit(input)) {
       int number = std::stoi(input);
       if(number >= lower_bound && number <= upper_bound) return number;
-    } else if (input == exit_string) return -1; 
+    }
     //jeigu neatitiko sąlygų
     cout<<err_text;
   }
@@ -37,15 +47,13 @@ int input_integer(string text, string err_text, string exit_string, int lower_bo
 
 float calculate_mean(int n, vector<int> grades)
 {
-  float sum = 0;
-  for(int i = 0; i<n; i++) sum+=grades[i];
-  return sum/n;
+  return std::accumulate(grades.begin(), grades.end(), 0) / n;
 }
 
 float calculate_median(int n, vector<int> grades)
 {
   if(grades.size() != 0) {
-    std::sort(grades.begin(), grades.end());
+    sort_container(grades);
     //jei nelyginis skaičius namų darbų
     if(n%2 != 0) return grades[n / 2];
     //jei lyginis skaičius namų darbų
@@ -53,4 +61,11 @@ float calculate_median(int n, vector<int> grades)
   } else return 0;
 }
 
+bool files_exists(const string &name) {
+  struct stat buffer;   
+  return (stat (name.c_str(), &buffer) == 0); 
+}
 
+
+template void sort_container(vector<Student> &students);
+template void sort_container(deque<Student> &students);

@@ -28,17 +28,53 @@ Vardas4                 Pavarde4                      7         9         8     
 ```
 
 * [v0.3](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.3) - Didelė programos kodo dalis buvo reorganizota ir išskirstyta po failus `Extensions` folderyje. Taip pat buvo implementuota išimčių tvarkymas, kuris turėtų užtikrinti stabilesnį programos veikimą.
+
 * [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4) - Šioje versijoje buvo realizuota "benchmark" funkcija, kuri išmatuos programos veikimo laiką per keletą testų su skirtingais įrašų kiekiais.
 * [v0.4.1](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4.1) - Šioje versijoje buvo pamodifikuota "benchmark" implementacija taip, kad studentų grupių failai būtų generuojami į `Benchmark` folderį.
+
+* [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) - Šioje versijoje buco patobulinta 'benchmark' funkcija iš [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4.1) versijos. Dabar galima atlikti testą su vienu iš trijų duomenų konteinerių: [`vector`, `list`, `deque`]. Spartos tyrimo rezultatus galite rasti [čia](#speed-chart)
+
+
+## <a name="speed-chart"></a>Spartos tyrimas
+Nuo [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) versijos galima atlikti 'benchmark'ą' su skirtingais konteineriais.  
+Čia yra pateikti laikai (sekundėmis) tarp skirtingų įrašų kiekių ir skirtingų konteinerių operacijų.
+
+Testavimo mašinos konfiguracija:
+ * CPU - AMD Ryzen5 2600 3.40Ghz
+ * RAM - 8GB 3200 Mhz
+ * SSD - 256GB 
+
+|                               | 1000    | 10000   | 100000  | 1000000 | 10000000 |
+|:----:                         |:----:   |:-----:  |:------: |:-------:|:--------:|
+| **Vector <br/> nuskaitymas**  | 0.00213 | 0.01781 | 0.17159 | 1.61167 | 16.94    |
+| **Vector <br/> surikiavimas** | 0.00016 | 0.00144 | 0.02143 | 0.23327 | 2.83701  |
+| **Vector <br/> išrūšiavimas** | 9.95e-05| 0.00087 | 0.01552 | 0.16637 | 1.80707  |
+| **Vector <br/> total**        | 0.00240 | 0.02013 | 0.20855 | 2.01131 | 21.5841  |
+|                               |         |         |         |         |          |
+| **List <br/> nuskaitymas**    | 0.00177 | 0.01623 | 0.15864 | 1.59084 | 16.4044  |
+| **List <br/> surikiavimas**   | 0.00010 | 0.00114 | 0.02620 | 0.58988 | 10.6879  |
+| **List <br/> išrūšiavimas**   | 0.00015 | 0.00129 | 0.02828 | 0.37296 | 4.10965  |
+| **List <br/> total**          | 0.00203 | 0.01867 | 0.21313 | 2.55369 | 31.202   |
+|                               |         |         |         |         |          |
+| **Deque <br/> nuskaitymas**   | 0.00172 | 0.01665 | 0.15650 | 1.55025 | 15.5156  |
+| **Deque <br/> surikiavimas**  | 0.00016 | 0.00183 | 0.02313 | 0.31124 | 3.82034  |
+| **Deque <br/> išrūšiavimas**  | 0.00012 | 0.00093 | 0.01571 | 0.21323 | 2.23356  |
+| **Deque <br/> total**         | 0.00201 | 0.01941 | 0.19535 | 2.07472 | 21.5695  |
 
 
 
 ## Naudojimosi instrukcija
-1. Pasirinkti ar norima atlikti "benchmark'ą":
+1. Pasirinkti ar norima atlikti "benchmark'ą" ir su kokiu konteineriu, jei taip:
 ```shell
->> Ar norėtumėte atlikti programos 'benchmark'ą'? y/n:
+>> Ar norėtumėte atlikti programos 'benchmark'ą'? y/n: y
+>> Su kuriuo konteineriu atlikti testą?
+     1) Vektor"
+     2) List"
+     3) Deque"
+     4) Atšaukti"
+     Įveskite pasirinkimą:
 ```
-2. Pasirinkti ar nuskaityti duomenis iš failo, ir įvesti failo pavadinimą jei taip:  
+2. Pasirinkti ar nuskaityti duomenis iš failo ir įvesti failo pavadinimą, jei taip:  
 ```shell
 >> Ar norėtumėte nuskaityti studentų duomenis iš failo? y/n: y
 >> Iveskite failo pavadinimą: file-name.txt
