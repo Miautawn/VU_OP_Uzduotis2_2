@@ -32,12 +32,17 @@ Vardas4                 Pavarde4                      7         9         8     
 * [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4) - Šioje versijoje buvo realizuota "benchmark" funkcija, kuri išmatuos programos veikimo laiką per keletą testų su skirtingais įrašų kiekiais.
 * [v0.4.1](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4.1) - Šioje versijoje buvo pamodifikuota "benchmark" implementacija taip, kad studentų grupių failai būtų generuojami į `Benchmark` folderį.
 * 
-* [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) - Šioje versijoje buco patobulinta 'benchmark' funkcija iš [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4.1) versijos. Dabar galima atlikti testą su vienu iš trijų duomenų konteinerių: [`vector`, `list`, `deque`]
+* [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) - Šioje versijoje buco patobulinta 'benchmark' funkcija iš [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4.1) versijos. Dabar galima atlikti testą su vienu iš trijų duomenų konteinerių: [`vector`, `list`, `deque`]. Spartos tyrimo rezultatus galite rasti [čia](#speed-chart)
 
 
-## Spartos tyrimo lentelė
+## <a name="speed-chart"></a>Spartos tyrimas
 Nuo [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) versijos galima atlikti 'benchmark'ą' su skirtingais konteineriais.  
-Čia yra pateikta spartos tyrimo rezultatai.
+Čia yra pateikti laikai (sekundėmis) tarp skirtingų įrašų kiekių ir skirtingų konteinerių operacijų.
+
+Testavimo mašinos konfiguracija:
+ * CPU - AMD Ryzen5 2600 3.40Ghz
+ * RAM - 8GB 3200 Mhz
+ * SSD - 256GB 
 
 |                               | 1000    | 10000   | 100000  | 1000000 | 10000000 |
 |:----:                         |:----:   |:-----:  |:------: |:-------:|:--------:|
