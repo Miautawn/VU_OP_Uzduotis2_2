@@ -61,6 +61,11 @@ float calculate_median(int n, vector<int> grades)
   } else return 0;
 }
 
+bool files_exists(const string &name) {
+  struct stat buffer;   
+  return (stat (name.c_str(), &buffer) == 0); 
+}
+
 
 template void sort_container(vector<Student> &students);
 template void sort_container(deque<Student> &students);

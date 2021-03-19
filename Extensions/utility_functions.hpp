@@ -18,6 +18,9 @@ float calculate_median(int n, vector<int> grades); //suskaičiuoja medianą
 //funkcija, kuri nuskaito tik sveikąjį skaičių ribose
 int input_integer(string text, string err_text, int lower_bound, int upper_bound, string exit_string = "");
 
+//funkcija kuri patikrina ar failas su tokiu vardu egzistuoja
+bool files_exists(const string &name);
+
 template <class Container>
 void sort_container(Container &students);
 

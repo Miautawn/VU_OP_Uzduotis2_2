@@ -42,7 +42,7 @@ void calculate_final(int grade_num, Student &new_student, bool is_mean)
   }
 }
 
-void student_benchmark_generate_file(int n)
+void student_benchmark_generate_file(int n, string file_name)
 {
   vector<Student> generated_students;
   Student bench_student;
@@ -70,7 +70,6 @@ void student_benchmark_generate_file(int n)
   }
 
   //išvedimas mūsų benchmark failo
-  string file_name = "bench_temp" + std::to_string(n) + ".txt";
   ofstream output(file_name);
   output << buffer.str();
   output.close();  
@@ -83,19 +82,23 @@ void student_benchmark(Container bench_students, string container_code)
   int stages[5] = {1000, 10000, 100000, 1000000, 10000000};
   double full_time;
   Timer m_timer;
+  string local_file;
   
   for(int stage_index = 0; stage_index < 5; stage_index++) {
 
     cout<<"\n***************************";
     cout<<"\nPradedamas tikrinimas su "<<stages[stage_index]<<" studentų..."<<endl;
-    full_time = 0;
     m_timer.reset();
+    full_time = 0;
+    local_file = "bench_temp" + std::to_string(stages[stage_index]) + ".txt";
 
     //failo kūrimas
-    student_benchmark_generate_file(stages[stage_index]);
-    cout<<stages[stage_index]<<" studentų generavimas ir failo kūrimas užtruko: "
-    <<m_timer.split_time(full_time)<<endl;
-
+    if(!files_exists(local_file)) {
+      student_benchmark_generate_file(stages[stage_index], local_file);
+      cout<<stages[stage_index]<<" studentų generavimas ir failo kūrimas užtruko: "
+      <<m_timer.split_time(full_time)<<endl;
+    }
+    
     //failo nuskaitymas
     read_students_from_file(bench_students, 
     "bench_temp" + std::to_string(stages[stage_index]) + ".txt", false);
@@ -103,6 +106,8 @@ void student_benchmark(Container bench_students, string container_code)
     <<m_timer.split_time(full_time)<<endl;
     
     //studentų rūšiavimas į dvi grupes:
+    ///////////////////////////////////
+
     //1) surušiavimas didėjimo tvarka
     sort_container(bench_students);
     cout<<stages[stage_index]<<" studentų surūšiavimas didėjimo tvarka užtruko: "
@@ -114,17 +119,15 @@ void student_benchmark(Container bench_students, string container_code)
     [](const Student &l_student, const int value) {
       return l_student.final_score_mean < value;
     });
-    cout<<stages[stage_index]<<" Grupių ribos radimas užtruko: "
-    <<m_timer.split_time(full_time)<<endl;
 
-    //kietaku ir varguoliu "kopijavimas"
+    //3) kietaku ir varguoliu "kopijavimas"
     Container kietuoliai {first_good_student, bench_students.end()};
     Container varguoliai {bench_students.begin(), first_good_student};
-    cout<<stages[stage_index]<<" Įrašų 'kietakų' ir 'varguolių' kopijavimas užtruko: "
+    cout<<stages[stage_index]<<" Įrašų 'kietakų' ir 'varguolių' rūšiavimas užtruko: "
     <<m_timer.split_time(full_time)<<endl;
 
     //kietakų išvedimas į failą
-    string local_file = "Benchmark/bench_kietuoliai" + std::to_string(stages[stage_index]) + ".txt";
+    local_file = "Benchmark/bench_kietuoliai" + std::to_string(stages[stage_index]) + ".txt";
     output_students(kietuoliai, true, local_file, false);
     cout<<stages[stage_index]<<" Įrašų 'kietuolių' išvedimas į failą užtruko: "
     <<m_timer.split_time(full_time)<<endl;
