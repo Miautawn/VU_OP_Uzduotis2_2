@@ -117,14 +117,10 @@ void student_benchmark(Container bench_students, string container_code)
     cout<<stages[stage_index]<<" Grupių ribos radimas užtruko: "
     <<m_timer.split_time(full_time)<<endl;
 
-    //kietaku "kopijavimas"
+    //kietaku ir varguoliu "kopijavimas"
     Container kietuoliai {first_good_student, bench_students.end()};
-    cout<<stages[stage_index]<<" Įrašų 'kietuolių' kopijavimas užtruko: "
-    <<m_timer.split_time(full_time)<<endl;
-
-    //Varguoliu "kopijavimas"
     Container varguoliai {bench_students.begin(), first_good_student};
-    cout<<stages[stage_index]<<" Įrašų 'varguolių' kopijavimas užtruko: "
+    cout<<stages[stage_index]<<" Įrašų 'kietakų' ir 'varguolių' kopijavimas užtruko: "
     <<m_timer.split_time(full_time)<<endl;
 
     //kietakų išvedimas į failą
