@@ -62,6 +62,23 @@ Testavimo mašinos konfiguracija:
 | **Deque <br/> total**         | 0.00201 | 0.01941 | 0.19535 | 2.07472 | 21.5695  |
 
 
+## Rūšiavimo spartos tyrimas
+Buo [v1.0]() versijos atliekant 'benchmark'ą' galima pasirinkti ir kokiu metodu daryti studentų skirtymą:
+COPY - studentai bus skirstomi į du atskirus konteinerius, todėl bus naudojama daugiau atminties
+REMOVE - iš pagrindinio masyvo bus ištrinami geriausiai besimokantys moksleiviai, todėl bus naudojami iš viso tik du masyvai.
+
+Čia yra pateikiama rūšiavimo spartos lentelė, priklausomai nuo konteinerio ir rūšiavimo metodo
+|                               | 1000    | 10000   | 100000  | 1000000 | 10000000 |
+|:----:                         |:----:   |:-----:  |:------: |:-------:|:--------:|
+| **Vector <br/> COPY**  | 9.04e-05 | 0.00083 | 0.01220 | 0.16100 | 1.76932 |
+| **List <br/> COPY**    | 0.000141 | 0.00122 | 0.02831 | 0.33389 | 3.627 |
+| **Deque <br/> COPY**   | 0.00010 | 0.00087 | 0.01591 | 0.21077 | 2.27838 |
+|                        |         |         |         |         |          |
+| **Vector <br/> REMOVE**  | 0.00012 | 0.00052 | 0.00830 | 0.10349 | 1.21316 |
+| **List <br/> REMOVE**    | 9.06e-05 | 0.00078 | 0.02261 | 0.28312 | 2.93625 |
+| **Deque <br/> REMOVE**   | 0.00012 | 0.00056 | 0.01106 | 0.14398 | 1.59475 |
+
+
 
 ## Naudojimosi instrukcija
 1. Pasirinkti ar norima atlikti "benchmark'ą" ir su kokiu konteineriu, jei taip:
