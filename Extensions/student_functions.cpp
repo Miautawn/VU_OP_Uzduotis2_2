@@ -120,22 +120,23 @@ void student_benchmark(Container bench_students, string container_code,  string 
       return l_student.final_score_mean < value;
     });
 
-    //3) kietaku ir varguoliu "kopijavimas"
-    Container *kietuoliai;
-    Container *varguoliai;
+    //3) kietaku ir varguoliu į skirtingus konteinerius paskirstymas
+    Container temp_kietuoliai;
+    Container temp_varguoliai;
+    Container *kietuoliai = &temp_kietuoliai;
+    Container *varguoliai = &temp_varguoliai;
     if(split_mode == "COPY") {
-      kietuoliai = new Container{first_good_student, bench_students.end()};
-      varguoliai = new Container{bench_students.begin(), first_good_student};
+      temp_kietuoliai = {first_good_student, bench_students.end()};
+      temp_varguoliai = {bench_students.begin(), first_good_student};
     } else {
-      cout<<"GAY"<<endl;
-      kietuoliai = new Container{first_good_student, bench_students.end()};
+      temp_kietuoliai = {first_good_student, bench_students.end()};
       bench_students.erase(first_good_student, bench_students.end());
       varguoliai = &bench_students;
     }
 
     cout<<stages[stage_index]<<" Įrašų 'kietakų' ir 'varguolių' rūšiavimas užtruko: "
     <<m_timer.split_time(full_time)<<endl;
-    
+
     ///////////////////////////////////
     //studentų rūšiavimas į dvi grupes:
     
