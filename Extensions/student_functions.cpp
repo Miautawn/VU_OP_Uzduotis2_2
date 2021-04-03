@@ -77,7 +77,7 @@ void student_benchmark_generate_file(int n, string file_name)
 
 
 template <class Container>
-void student_benchmark(Container bench_students, string container_code)
+void student_benchmark(Container bench_students, string container_code,  string split_mode)
 {
   int stages[5] = {1000, 10000, 100000, 1000000, 10000000};
   double full_time;
@@ -121,20 +121,34 @@ void student_benchmark(Container bench_students, string container_code)
     });
 
     //3) kietaku ir varguoliu "kopijavimas"
-    Container kietuoliai {first_good_student, bench_students.end()};
-    Container varguoliai {bench_students.begin(), first_good_student};
+    Container *kietuoliai;
+    Container *varguoliai;
+    if(split_mode == "COPY") {
+      kietuoliai = new Container{first_good_student, bench_students.end()};
+      varguoliai = new Container{bench_students.begin(), first_good_student};
+    } else {
+      cout<<"GAY"<<endl;
+      kietuoliai = new Container{first_good_student, bench_students.end()};
+      bench_students.erase(first_good_student, bench_students.end());
+      varguoliai = &bench_students;
+    }
+
     cout<<stages[stage_index]<<" Įrašų 'kietakų' ir 'varguolių' rūšiavimas užtruko: "
     <<m_timer.split_time(full_time)<<endl;
+    
+    ///////////////////////////////////
+    //studentų rūšiavimas į dvi grupes:
+    
 
     //kietakų išvedimas į failą
     local_file = "Benchmark/bench_kietuoliai" + std::to_string(stages[stage_index]) + ".txt";
-    output_students(kietuoliai, true, local_file, false);
+    output_students(*kietuoliai, true, local_file, false);
     cout<<stages[stage_index]<<" Įrašų 'kietuolių' išvedimas į failą užtruko: "
     <<m_timer.split_time(full_time)<<endl;
 
     //nabagėlių išvedimas į failą
     local_file = "Benchmark/bench_varguoliai" + std::to_string(stages[stage_index]) + ".txt";
-    output_students(varguoliai, true, local_file, false);
+    output_students(*varguoliai, true, local_file, false);
     cout<<stages[stage_index]<<" Įrašų 'varguolių' išvedimas į failą užtruko: "
     <<m_timer.split_time(full_time)<<endl;
 
@@ -148,6 +162,6 @@ void student_benchmark(Container bench_students, string container_code)
   }
 }
 
-template void student_benchmark(vector<Student> bench_students, string container_code);
-template void student_benchmark(list<Student> bench_students, string container_code);
-template void student_benchmark(deque<Student> bench_students, string container_code);
+template void student_benchmark(vector<Student> bench_students, string container_code, string split_mode);
+template void student_benchmark(list<Student> bench_students, string container_code, string split_mode);
+template void student_benchmark(deque<Student> bench_students, string container_code, string split_mode);
