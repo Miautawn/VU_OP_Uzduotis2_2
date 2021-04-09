@@ -116,9 +116,10 @@ void student_benchmark(Container bench_students, string container_code,  string 
     //2) pirmo >= 5 radimas
     typename Container::iterator first_good_student = 
     std::lower_bound(bench_students.begin(), bench_students.end(), 5,
-    [](const Student &l_student, const int value) {
-      return l_student.final_score_mean < value;
-    });
+      [](const Student &l_student, const int value) {
+        return l_student.final_score_mean < value;
+      });
+    
 
     //3) kietaku ir varguoliu į skirtingus konteinerius paskirstymas
     Container temp_kietuoliai;
