@@ -69,8 +69,8 @@ Testavimo mašinos konfiguracija:
 ## <a name="sort-chart"></a>Rūšiavimo spartos tyrimas
 Nuo [v1.0](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v1.0)
 versijos atliekant 'benchmark'ą' galima pasirinkti ir kokiu metodu daryti studentų skirstymą:  
-COPY - studentai bus skirstomi į du atskirus konteinerius, todėl bus naudojama daugiau atminties  
-REMOVE - iš pagrindinio masyvo bus ištrinami geriausiai besimokantys moksleiviai, todėl bus naudojami iš viso tik du masyvai.
+ * COPY - studentai bus skirstomi į du atskirus konteinerius, todėl bus naudojama daugiau atminties  
+ * REMOVE - iš pagrindinio masyvo bus ištrinami geriausiai besimokantys moksleiviai, todėl bus naudojami iš viso tik du masyvai.
 
 Čia yra pateikiama rūšiavimo spartos lentelė, priklausomai nuo konteinerio ir rūšiavimo metodo
 |                               | 1000    | 10000   | 100000  | 1000000 | 10000000 |
