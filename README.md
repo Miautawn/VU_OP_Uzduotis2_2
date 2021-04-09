@@ -32,7 +32,11 @@ Vardas4                 Pavarde4                      7         9         8     
 * [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4) - Šioje versijoje buvo realizuota "benchmark" funkcija, kuri išmatuos programos veikimo laiką per keletą testų su skirtingais įrašų kiekiais.
 * [v0.4.1](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4.1) - Šioje versijoje buvo pamodifikuota "benchmark" implementacija taip, kad studentų grupių failai būtų generuojami į `Benchmark` folderį.
 
-* [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) - Šioje versijoje buco patobulinta 'benchmark' funkcija iš [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4.1) versijos. Dabar galima atlikti testą su vienu iš trijų duomenų konteinerių: [`vector`, `list`, `deque`]. Spartos tyrimo rezultatus galite rasti [čia](#speed-chart)
+* [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) - Šioje versijoje buvo patobulinta 'benchmark' funkciją iš [v0.4](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.4.1) versijos.  
+Dabar galima atlikti testą su vienu iš trijų duomenų konteinerių: [`vector`, `list`, `deque`]. Spartos tyrimo rezultatus galite rasti [čia](#speed-chart)
+
+* [v1.0](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v1.0) - Ši versija leidžia pasirinkti rūšiavimo metodiką darant 'benchmark' funkciją [`COPY`, `REMOVE`].  
+Programos spartos tyrimus priklausomai nuo pasirinkto metodo galima rasti [čia](#sort-chart).
 
 
 ## <a name="speed-chart"></a>Spartos tyrimas
@@ -62,9 +66,30 @@ Testavimo mašinos konfiguracija:
 | **Deque <br/> total**         | 0.00201 | 0.01941 | 0.19535 | 2.07472 | 21.5695  |
 
 
+## <a name="sort-chart"></a>Rūšiavimo spartos tyrimas
+Nuo [v1.0](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v1.0)
+versijos atliekant 'benchmark'ą' galima pasirinkti ir kokiu metodu daryti studentų skirstymą:  
+COPY - studentai bus skirstomi į du atskirus konteinerius, todėl bus naudojama daugiau atminties  
+REMOVE - iš pagrindinio masyvo bus ištrinami geriausiai besimokantys moksleiviai, todėl bus naudojami iš viso tik du masyvai.
+
+Čia yra pateikiama rūšiavimo spartos lentelė, priklausomai nuo konteinerio ir rūšiavimo metodo
+|                               | 1000    | 10000   | 100000  | 1000000 | 10000000 |
+|:----:                         |:----:   |:-----:  |:------: |:-------:|:--------:|
+| **Vector <br/> COPY**  | 9.04e-05 | 0.00083 | 0.01220 | 0.16100 | 1.76932 |
+| **List <br/> COPY**    | 0.000141 | 0.00122 | 0.02831 | 0.33389 | 3.627 |
+| **Deque <br/> COPY**   | 0.00010 | 0.00087 | 0.01591 | 0.21077 | 2.27838 |
+|                        |         |         |         |         |          |
+| **Vector <br/> REMOVE**  | 0.00012 | 0.00052 | 0.00830 | 0.10349 | 1.21316 |
+| **List <br/> REMOVE**    | 9.06e-05 | 0.00078 | 0.02261 | 0.28312 | 2.93625 |
+| **Deque <br/> REMOVE**   | 0.00012 | 0.00056 | 0.01106 | 0.14398 | 1.59475 |
+
+### Rūšiavimo spartos optimizavimas "Vector" konteineriui  
+Kad optimizuoti rūšiavimo spartą buvo bandyta pritaikyti `std::find_if()` ir `std::copy()` metodus "Vector" klasei, tačiau rezultatai buvo neigiami ir programos veikimo laikas buvo ilgesnis, nei praeitos implementacijos. Galimas paaiškinimas yra toks, kad dėl esamos rūšiavimo kodo implementacjos, tokia funckija kaip `copy()` reikalauja daugiau žingsnių kad būtų pritaikyta ir dėl to daugiau užima laiko.
+
+
 
 ## Naudojimosi instrukcija
-1. Pasirinkti ar norima atlikti "benchmark'ą" ir su kokiu konteineriu, jei taip:
+1. Pasirinkti ar norima atlikti "benchmark'ą" ir su kokiu konteineriu bei rūšiavimo metodika:
 ```shell
 >> Ar norėtumėte atlikti programos 'benchmark'ą'? y/n: y
 >> Su kuriuo konteineriu atlikti testą?
@@ -73,8 +98,14 @@ Testavimo mašinos konfiguracija:
      3) Deque"
      4) Atšaukti"
      Įveskite pasirinkimą:
+     
+>> Su kuriuo metodu atlikti rušiavimą?
+     1) Kopijavimu metodu
+     2) Trynimo metodu
+     Įveskite pasirinkimą:
 ```
-2. Pasirinkti ar nuskaityti duomenis iš failo ir įvesti failo pavadinimą, jei taip:  
+2. Jei nenorima daryti benchmark'o, reikia pasirinkti ar nuskaityti duomenis iš failo  
+ir įvesti failo pavadinimą, jei taip:  
 ```shell
 >> Ar norėtumėte nuskaityti studentų duomenis iš failo? y/n: y
 >> Iveskite failo pavadinimą: file-name.txt

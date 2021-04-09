@@ -17,6 +17,6 @@ void calculate_final(int grade_num, Student &new_student, bool is_mean); //suska
 
 //ši funkcija atlkits programos benchmarką
 template <class Container>
-void student_benchmark(Container bench_students, string container_code);
+void student_benchmark(Container bench_students, string container_code, string split_mode);
 
 #endif

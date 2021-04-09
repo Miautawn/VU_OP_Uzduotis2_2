@@ -15,11 +15,20 @@ int main() {
       "\nĮveskite pasirinkimą: ",
       "Klaida, bandykite vėl: ", 1, 4);
 
+    string split_mode = "";
+    int split_index = input_integer(
+      "\nSu kuriuo metodu atlikti rušiavimą?"
+      "\n1) Kopijavimu metodu"
+      "\n2) Trynimo metodu"
+      "\nĮveskite pasirinkimą: ",
+      "Klaida, bandykite vėl: ", 1, 2);
+    split_mode = (split_index == 1) ? "COPY" : "REMOVE";
+
     if(container_code != 4) {
       switch(container_code) {
-        case 1 : student_benchmark(vector<Student> (), "VECTOR"); break;
-        case 2 : student_benchmark(list<Student> (), "LIST"); break;
-        case 3 : student_benchmark(deque<Student> (), "DEQUE"); break;}
+        case 1 : student_benchmark(vector<Student> (), "VECTOR", split_mode); break;
+        case 2 : student_benchmark(list<Student> (), "LIST", split_mode); break;
+        case 3 : student_benchmark(deque<Student> (), "DEQUE", split_mode); break;}
       exit(0);
     }else cout<<"Atšaukiamas benchmark'as...\n"<<endl;
   } else cout<<endl;
@@ -28,7 +37,7 @@ int main() {
   vector <Student> students;
   students.reserve(10);
   bool manual_input = false;
-
+ 
   //nuskaitymas iš failo
   if(yes_or_no("Ar norėtumėte nuskaityti studentų duomenis iš failo?")) {
 
