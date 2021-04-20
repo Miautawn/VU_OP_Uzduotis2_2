@@ -22,6 +22,6 @@ int input_integer(string text, string err_text, int lower_bound, int upper_bound
 bool files_exists(const string &name);
 
 template <class Container>
-void sort_container(Container &students);
+void sort_container(Container &items);
 
 #endif

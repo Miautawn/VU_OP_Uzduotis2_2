@@ -1,14 +1,10 @@
 #include "utility_functions.hpp"
 
 template <class Container>
-void sort_container(Container &students) {
-  std::sort(students.begin(), students.end());
-}
+void sort_container(Container &items) {
+    std::sort(items.begin(), items.end());
+} 
 
-template <>
-void sort_container(list<Student> &students) {
-  students.sort();
-}
 
 bool yes_or_no(string text)
 {
@@ -47,7 +43,7 @@ int input_integer(string text, string err_text, int lower_bound, int upper_bound
 
 float calculate_mean(int n, vector<int> grades)
 {
-  return std::accumulate(grades.begin(), grades.end(), 0) / n;
+  return float(std::accumulate(grades.begin(), grades.end(), 0)) / n;
 }
 
 float calculate_median(int n, vector<int> grades)
@@ -65,7 +61,3 @@ bool files_exists(const string &name) {
   struct stat buffer;   
   return (stat (name.c_str(), &buffer) == 0); 
 }
-
-
-template void sort_container(vector<Student> &students);
-template void sort_container(deque<Student> &students);

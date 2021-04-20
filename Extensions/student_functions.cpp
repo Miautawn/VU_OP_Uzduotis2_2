@@ -1,46 +1,27 @@
 #include "student_functions.hpp"
 
-void generate_grades(int &n, Student &new_student, bool log)
+//funkcija, kuri palygina du studentus pagal pavardę ar vardą
+bool student_compare_names(Student l_student, Student r_student)
 {
-    RandomInt generator;
-    //jeigu vartotojas nepasakė kiek turi būti pažymių
-    if(n == -1) n = generator.rnd(0, 15); 
-
-    new_student.grades.reserve(n);
-    for(int i=0; i<n; i++) new_student.grades.push_back(generator.rnd(0,10));
-
-    if(log) {
-      cout<<"\nBuvo sugeneruoti tokie "<<n<<" ND pažymiai: ";
-      for(int grade: new_student.grades) cout<<grade<<" ";
-    }
-    new_student.exam_score = generator.rnd(0,10);
-    if(log) cout<<"\nIr egzamino rezultatas: "<<new_student.exam_score<<endl;
+  return (l_student.get_last_name() == r_student.get_last_name()) ? 
+        l_student.get_name() < r_student.get_name() : 
+        l_student.get_last_name() < r_student.get_last_name();
 }
 
-void calculate_final(int grade_num, Student &new_student, bool is_mean)
-{
-  new_student.is_mean = is_mean;
-  //jeigu yra nd pažymių
-  if(grade_num != 0) {
-
-    //skaičiuoti per vidurkį
-    if(is_mean) { 
-      new_student.mean = calculate_mean(grade_num, new_student.grades);
-      new_student.final_score_mean = 0.4 * new_student.mean + 0.6 * new_student.exam_score;
-    }
-    //skaičiuoti per medianą 
-    if(!is_mean) {  
-      new_student.median = calculate_median(grade_num, new_student.grades);
-      new_student.final_score_median = 0.4 * new_student.median + 0.6 * new_student.exam_score;
-    } 
-  }
-  //jeigu pažymių iš ND nebuvo 
-  else {
-    new_student.mean, new_student.median = 0, 0;
-    new_student.final_score_mean = 0.6 * new_student.exam_score;
-    new_student.final_score_median =  0.6 * new_student.exam_score;
+template <class Container>
+void sort_students(Container &students, string sort_argument) {
+  if(sort_argument == "GRADES") {
+    std::sort(students.begin(), students.end());
+  } else if(sort_argument == "NAMES") {
+    std::sort(students.begin(), students.end(), student_compare_names);
   }
 }
+
+template <>
+void sort_students(list<Student> &students, string sort_argument) {
+  students.sort();
+}
+
 
 void student_benchmark_generate_file(int n, string file_name)
 {
@@ -52,21 +33,21 @@ void student_benchmark_generate_file(int n, string file_name)
   for(int i = 0; i<n; i++) {
 
     //duomenų generavimas
-    bench_student.grades.clear();
-    bench_student.name = "Vardas" + std::to_string(i+1);
-    bench_student.last_name = "Pavarde" +  std::to_string(i+1);
+    bench_student.clear_grades();
+    bench_student.set_name("Vardas" + std::to_string(i+1));
+    bench_student.set_last_name("Pavarde" +  std::to_string(i+1));
     int grade_num = -1;
-    generate_grades(grade_num, bench_student, false);
+    bench_student.generate_grades(grade_num, false);
 
     //studento buferizavimas
     buffer<<left<<setw(15)
-          <<bench_student.name<<" "<<setw(30)
-          <<bench_student.last_name;
+          <<bench_student.get_name()<<" "<<setw(30)
+          <<bench_student.get_last_name();
 
-    for(int j = 0; j<bench_student.grades.size(); j++) 
-    buffer<<left<<setw(5)<<bench_student.grades[j]<<setw(5);
+    for(int j = 0; j<bench_student.get_grade(); j++) 
+    buffer<<left<<setw(5)<<bench_student.get_grade(j)<<setw(5);
 
-    buffer<<bench_student.exam_score<<endl;
+    buffer<<bench_student.get_exam_score()<<endl;
   }
 
   //išvedimas mūsų benchmark failo
@@ -109,7 +90,7 @@ void student_benchmark(Container bench_students, string container_code,  string 
     ///////////////////////////////////
 
     //1) surušiavimas didėjimo tvarka
-    sort_container(bench_students);
+    sort_students(bench_students);
     cout<<stages[stage_index]<<" studentų surūšiavimas didėjimo tvarka užtruko: "
     <<m_timer.split_time(full_time)<<endl;
 
@@ -117,7 +98,7 @@ void student_benchmark(Container bench_students, string container_code,  string 
     typename Container::iterator first_good_student = 
     std::lower_bound(bench_students.begin(), bench_students.end(), 5,
       [](const Student &l_student, const int value) {
-        return l_student.final_score_mean < value;
+        return l_student.get_final_score_mean() < value;
       });
     
 
@@ -144,13 +125,13 @@ void student_benchmark(Container bench_students, string container_code,  string 
 
     //kietakų išvedimas į failą
     local_file = "Benchmark/bench_kietuoliai" + std::to_string(stages[stage_index]) + ".txt";
-    output_students(*kietuoliai, true, local_file, false);
+    output_to_file(*kietuoliai, "GRADES", false, local_file);
     cout<<stages[stage_index]<<" Įrašų 'kietuolių' išvedimas į failą užtruko: "
     <<m_timer.split_time(full_time)<<endl;
 
     //nabagėlių išvedimas į failą
     local_file = "Benchmark/bench_varguoliai" + std::to_string(stages[stage_index]) + ".txt";
-    output_students(*varguoliai, true, local_file, false);
+    output_to_file(*varguoliai, "GRADES", false, local_file);
     cout<<stages[stage_index]<<" Įrašų 'varguolių' išvedimas į failą užtruko: "
     <<m_timer.split_time(full_time)<<endl;
 
@@ -163,6 +144,9 @@ void student_benchmark(Container bench_students, string container_code,  string 
     }
   }
 }
+
+template void sort_students(vector<Student> &students, string sort_argument);
+template void sort_students(deque<Student> &students, string sort_argument);
 
 template void student_benchmark(vector<Student> bench_students, string container_code, string split_mode);
 template void student_benchmark(list<Student> bench_students, string container_code, string split_mode);

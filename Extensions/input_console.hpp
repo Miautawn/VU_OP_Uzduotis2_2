@@ -3,7 +3,7 @@
 
 #include "martyno_lib.hpp"
 #include "structures.hpp"
-#include "utility_functions.hpp"
+// #include "utility_functions.hpp"
 
 // Čia funkcijos yra skirtos nuskaityti studentus iš consolės
 /////////////////////////////////////////////////////////////

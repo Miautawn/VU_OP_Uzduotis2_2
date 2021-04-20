@@ -12,11 +12,12 @@
 // Šios funkcijos yra skirtos dirbti su studentų duomenimis ir yra labai specifinės
 ///////////////////////////////////////////////////////////////////////////////////
 
-void generate_grades(int &n, Student &new_student, bool log = true); //sugeneruoja pažymius
-void calculate_final(int grade_num, Student &new_student, bool is_mean); //suskaičiuoja galutinį balą
-
 //ši funkcija atlkits programos benchmarką
 template <class Container>
 void student_benchmark(Container bench_students, string container_code, string split_mode);
+
+//ši funkcija išrikiuoja studentus pagal tam tikrą parametrą
+template <class Container>
+void sort_students(Container &students, string sort_argument = "GRADES");
 
 #endif

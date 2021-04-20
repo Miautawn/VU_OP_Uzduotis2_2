@@ -3,7 +3,7 @@
 
 #include "martyno_lib.hpp"
 #include "structures.hpp"
-#include "student_functions.hpp"
+// #include "student_functions.hpp"
 
 // Čia funkcijos yra skirtos nuskaityti studentus iš failo
 //////////////////////////////////////////////////////////

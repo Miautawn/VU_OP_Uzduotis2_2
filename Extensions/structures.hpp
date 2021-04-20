@@ -1,26 +1,51 @@
 #ifndef STRUCTURES_HPP
 #define STRUCTURES_HPP
 
-// Čia yra pagrindinė duomenų struktūra
-///////////////////////////////////////
+#include "martyno_lib.hpp"
+#include "random_generator.h"
+#include "utility_functions.hpp"
 
-struct Student
+class Student
 {
-  string name;
-  string last_name;
+  // privatūs atributai
+  private:
+    string name;
+    string last_name;
+    vector<int> grades;
+    int exam_score;
+    bool is_mean;
+    float mean;
+    float median;
+    float final_score_mean;
+    float final_score_median;
 
-  vector<int> grades;
-  int exam_score;
+    void validate_grade(string grade_temp, bool exam);
   
-  bool is_mean;
-  float mean;
-  float median;
-  
-  float final_score_mean;
-  float final_score_median;
+  // vieši atributai ir funkcijos
+  public:
+    Student() : exam_score{0} {} //default konstruktorius
+    Student(std::istream& source); // konstruktorius skirtas skaityti iš failo
 
-  bool operator < (const Student &another_student) {
-    return this->final_score_mean < another_student.final_score_mean;}
+    //getter'iai
+    string get_name() const;
+    string get_last_name() const;
+    bool get_is_mean() const;
+    int get_exam_score() const;
+    float get_final_score_mean() const;
+    float get_final_score_median() const;
+    int get_grade(int i = -1) const;
+
+    //setter'iai
+    void set_name(string name);
+    void set_last_name(string last_name);
+    void add_grade(int grade);
+    void set_exam_score(int exam_score);
+
+    //member funkcijos
+    void clear_grades();
+    void generate_grades(int &n, bool log = true);
+    void calculate_final(bool is_mean);
+    bool operator < (const Student &another_student);
 };
 
 #endif

@@ -3,14 +3,16 @@
 
 #include "martyno_lib.hpp"
 #include "structures.hpp"
-#include "utility_functions.hpp"
-#include <algorithm>
+#include "student_functions.hpp"
 
 // Čia funkcijos yra skirtos išvesti rezultatus
 ///////////////////////////////////////////////
 
 //universali išvedimo funkcija
 template <class Container>
-void output_students(Container students, bool to_file, string file_name = "output.txt", bool log = true);
+void output_to_console(Container students);
+
+template <class Container>
+void output_to_file(Container students, string sort_argument = "GRADES", bool log = true, string file_name = "output.txt");
 
 #endif
