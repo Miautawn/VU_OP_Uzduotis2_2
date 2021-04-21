@@ -41,7 +41,7 @@ Programos spartos tyrimus priklausomai nuo pasirinkto metodo galima rasti [čia]
 * [v1.0-vector](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v1.0-vector) - Ši versija yra identiška [v1.0](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v1.0) tačiau `vector` klasė naudoja `std::find_if()` ir `std::copy()` funkcijas.  
 
 * [v1.1](https://github.com/Miautawn/VU_OP_Uzduotis2_2/releases/tag/v1.1) - Šioje versijoje buvo refaktorin'tas kodas, kad veiktų su Studentas klase.  
-Programos spartus palyginimus tarp senos ir naudos implementacijos galite matyti [čia](#struct-class.)
+Programos spartus palyginimus tarp senos ir naudos implementacijos galite matyti [čia](#struct-class).
 
 
 ## <a name="speed-chart"></a>Spartos tyrimas
@@ -107,6 +107,13 @@ Studentų laikymas buvo perdarytas kad programa naudotų klasę, o ne struktūr�
 | **Klasės surūšiavimas**  | 0.02899 | 0.37887 |
 | **Klasės išvedimas** | 0.11091 | 1.33663 |
 | **Klasės TOTAL** | 0.30918 | 3.40144 |
+
+Štai čia galime matyti ir programos dydžius priklausomai nuo Optimizacijos pasirinkimo.  
+|                        | O1 | O2 | O3 |
+|:----:                  |:------: |:-------:|:-------:|
+| **Struktūros implementacija**  | 192Kb | 192Kb | 216Kb |
+| **Klasės implementacija**    | 184Kb | 184Kb | 180Kb |
+
 
 
 
