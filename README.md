@@ -40,6 +40,9 @@ Programos spartos tyrimus priklausomai nuo pasirinkto metodo galima rasti [čia]
 
 * [v1.0-vector](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v1.0-vector) - Ši versija yra identiška [v1.0](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v1.0) tačiau `vector` klasė naudoja `std::find_if()` ir `std::copy()` funkcijas.  
 
+* [v1.1](https://github.com/Miautawn/VU_OP_Uzduotis2_2/releases/tag/v1.1) - Šioje versijoje buvo refaktorin'tas kodas, kad veiktų su Studentas klase.  
+Programos spartus palyginimus tarp senos ir naudos implementacijos galite matyti [čia](#struct-class.)
+
 
 ## <a name="speed-chart"></a>Spartos tyrimas
 Nuo [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) versijos galima atlikti 'benchmark'ą' su skirtingais konteineriais.  
@@ -87,6 +90,23 @@ versijos atliekant 'benchmark'ą' galima pasirinkti ir kokiu metodu daryti stude
 
 ### Rūšiavimo spartos optimizavimas "Vector" konteineriui  
 Kad optimizuoti rūšiavimo spartą buvo bandyta pritaikyti `std::find_if()` ir `std::copy()` metodus "Vector" klasei, tačiau rezultatai buvo neigiami ir programos veikimo laikas buvo ilgesnis, nei praeitos implementacijos. Galimas paaiškinimas yra toks, kad dėl esamos rūšiavimo kodo implementacjos, tokia funckija kaip `copy()` reikalauja daugiau žingsnių kad būtų pritaikyta ir dėl to daugiau užima laiko.
+
+## <a name="struct-class"></a>Struktūtos ir klasės spartos tyrimas
+Nuo [v1.1](https://github.com/Miautawn/VU_OP_Uzduotis2_2/releases/tag/v1.1)
+Studentų laikymas buvo perdarytas kad programa naudotų klasę, o ne struktūrą.
+
+Čia yra pateikiama abiejų implementacijų spartos lentelė darant "benchmark" su **REMOVE** rūšiavimo taktika tarp 100000 ir 1000000 įrašų failų.
+|                        | 100000  | 1000000 |
+|:----:                  |:------: |:-------:|
+| **Struktūros nuskaitymas**  | 0.19552 | 1.73065 |
+| **Struktūros surūšiavimas**    | 0.02531 | 0.34887 |
+| **Struktūros išvedimas**   | 0.14974 | 1.68495 |
+| **Struktūros TOTAL**   | 0.37057 | 3.76447 |
+|                        |         |         |
+| **Klasės nuskaitymas**| 0.16927 | 1.68593 |
+| **Klasės surūšiavimas**  | 0.02899 | 0.37887 |
+| **Klasės išvedimas** | 0.11091 | 1.33663 |
+| **Klasės TOTAL** | 0.30918 | 3.40144 |
 
 
 
