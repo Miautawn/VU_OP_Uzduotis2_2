@@ -13,10 +13,12 @@ int Student::get_grade(int i) const { return i == -1 ? grades.size() : grades[i]
 void Student::set_name(string name) {this->name = name;}
 void Student::set_last_name(string last_name) {this->last_name = last_name;}
 void Student::add_grade(int grade) {grades.push_back(grade);}
+void Student::remove_grade() {grades.pop_back();}
 void Student::set_exam_score(int exam_score) {this->exam_score = exam_score;}
 
-//Iš failo skaitymo konstruktorius
-//////////////////////////////////
+
+
+//member funkcijos
 
 // pagalbinė funkcija, kuri validuoja gautus pažymius
 void Student::validate_grade(string grade_temp, bool exam) {
@@ -33,9 +35,10 @@ void Student::validate_grade(string grade_temp, bool exam) {
   }
 }
 
-// pats konstruktorius
-Student::Student(std::istream& source)
+// studento užpildymas iš streamo
+void Student::read_student(std::istringstream &source)
 {
+  grades.clear();
   source >> name >> last_name;
 
   //pazymiu skaitymas
@@ -48,11 +51,6 @@ Student::Student(std::istream& source)
   calculate_final(true); //vidurkiu paremtas galutinis balas
   calculate_final(false); //mediana paremtas galutinis balas
 }
-
-//////////////////////////////////
-//Iš failo skaitymo konstruktorius
-
-//member funkcijos
 
 //generuojamų pažymių funkcija
 void Student::generate_grades(int &n, bool log) {

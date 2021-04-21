@@ -39,10 +39,12 @@ class Student
     void set_name(string name);
     void set_last_name(string last_name);
     void add_grade(int grade);
+    void remove_grade();
     void set_exam_score(int exam_score);
 
     //member funkcijos
     void clear_grades();
+    void read_student(std::istringstream &source);
     void generate_grades(int &n, bool log = true);
     void calculate_final(bool is_mean);
     bool operator < (const Student &another_student);

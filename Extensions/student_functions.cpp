@@ -67,11 +67,13 @@ void student_benchmark(Container bench_students, string container_code,  string 
   
   for(int stage_index = 0; stage_index < 5; stage_index++) {
 
+    // bench_students.reserve(stages[stage_index]);
     cout<<"\n***************************";
     cout<<"\nPradedamas tikrinimas su "<<stages[stage_index]<<" studentų..."<<endl;
+    local_file = "bench_temp" + std::to_string(stages[stage_index]) + ".txt";
     m_timer.reset();
     full_time = 0;
-    local_file = "bench_temp" + std::to_string(stages[stage_index]) + ".txt";
+    
 
     //failo kūrimas
     if(!files_exists(local_file)) {
