@@ -11,7 +11,7 @@ class Student
   private:
     string name;
     string last_name;
-    vector<int> grades;
+    vector<int> *grades;
     int exam_score;
     bool is_mean;
     float mean;
@@ -23,8 +23,13 @@ class Student
   
   // vieši atributai ir funkcijos
   public:
-    Student() : exam_score{0} {} //default konstruktorius
-    Student(std::istream& source); // konstruktorius skirtas skaityti iš failo
+    Student(); //konstruktorius
+    ~Student(); //destruktorius
+    Student(const Student& other); //copy konstruktorius
+    Student& operator=(const Student& other); //copy operatorius
+    Student(Student&& other); //move konstruktorius
+    Student& operator=(Student&& other); //move operatorius
+    bool operator < (const Student &another_student); //palyginimo operatorius
 
     //getter'iai
     string get_name() const;
@@ -47,7 +52,8 @@ class Student
     void read_student(std::istringstream &source);
     void generate_grades(int &n, bool log = true);
     void calculate_final(bool is_mean);
-    bool operator < (const Student &another_student);
+    void print_grades();
+    
 };
 
 #endif

@@ -43,6 +43,8 @@ Programos spartos tyrimus priklausomai nuo pasirinkto metodo galima rasti [čia]
 * [v1.1](https://github.com/Miautawn/VU_OP_Uzduotis2_2/releases/tag/v1.1) - Šioje versijoje buvo refaktorin'tas kodas, kad veiktų su Studentas klase.  
 Programos spartus palyginimus tarp senos ir naudos implementacijos galite matyti [čia](#struct-class).
 
+* [v1.2](https://github.com/Miautawn/VU_OP_Uzduotis2_2/releases/tag/v1.2) - "Student" klasėje buvo realizuoti kopijavimo ir perkėlimo konstruktoriai bei operatoriai. Taip pat ir objekto destruktorius.
+
 
 ## <a name="speed-chart"></a>Spartos tyrimas
 Nuo [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) versijos galima atlikti 'benchmark'ą' su skirtingais konteineriais.  
