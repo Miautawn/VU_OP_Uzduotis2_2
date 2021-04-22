@@ -7,18 +7,48 @@ bool Student::get_is_mean() const {return is_mean;}
 int Student::get_exam_score() const {return exam_score;}
 float Student::get_final_score_mean() const {return final_score_mean;}
 float Student::get_final_score_median() const {return final_score_median;}
-int Student::get_grade(int i) const { return i == -1 ? grades.size() : grades[i]; }
+int Student::get_grade(int i) const { return i == -1 ? (*grades).size() : (*grades)[i]; }
 
 //setter'iai
 void Student::set_name(string name) {this->name = name;}
 void Student::set_last_name(string last_name) {this->last_name = last_name;}
-void Student::add_grade(int grade) {grades.push_back(grade);}
-void Student::remove_grade() {grades.pop_back();}
+void Student::add_grade(int grade) {(*grades).push_back(grade);}
+void Student::remove_grade() {(*grades).pop_back();}
 void Student::set_exam_score(int exam_score) {this->exam_score = exam_score;}
 
+Student::Student() : exam_score{0}, grades{new vector<int>}, is_mean{true} {} //konstruktroius
+Student::~Student() { delete grades; } //destruktorius;
+Student::Student(const Student& other) //copy konstruktorius
+      : name{other.name}, last_name{other.last_name},
+        is_mean{other.is_mean}, exam_score{other.exam_score},
+        mean{other.mean}, median{other.median},
+        final_score_mean{other.final_score_mean}, 
+        final_score_median{other.final_score_median},
+        grades{ new vector<int>( *(other.grades) ) } {}
 
+Student& Student::operator=(const Student& other) {
+  if( this == &other) return *this;
+  vector<int> *other_grades = new vector<int>(*(other.grades));
+  delete grades;
+  grades = other_grades;
+  name = other.name;
+  last_name = other.last_name;
+  exam_score = other.exam_score;
+  is_mean = other.is_mean;
+  mean = other.mean;
+  median = other.median;
+  final_score_mean = other.final_score_mean;
+  final_score_median = other.final_score_median;
+
+  return *this;
+}
+
+bool Student::operator < (const Student &another_student) { // palyginimo operatorius
+  return this->final_score_mean < another_student.final_score_mean;
+}
 
 //member funkcijos
+/////////////////
 
 // pagalbinė funkcija, kuri validuoja gautus pažymius
 void Student::validate_grade(string grade_temp, bool exam) {
@@ -26,11 +56,9 @@ void Student::validate_grade(string grade_temp, bool exam) {
     int grade = std::stoi(grade_temp);
     if(grade >= 0 && grade <= 10) {
       if(exam) {
-        grades.pop_back();
+        (*grades).pop_back();
         exam_score = grade;
-      } else grades.push_back(grade);
-  //   } else if (exam) student.exam_score = 0;
-  // } else if (exam) student.exam_score = 0;
+      } else (*grades).push_back(grade);
     }
   }
 }
@@ -38,7 +66,7 @@ void Student::validate_grade(string grade_temp, bool exam) {
 // studento užpildymas iš streamo
 void Student::read_student(std::istringstream &source)
 {
-  grades.clear();
+  (*grades).clear();
   source >> name >> last_name;
 
   //pazymiu skaitymas
@@ -58,13 +86,13 @@ void Student::generate_grades(int &n, bool log) {
     //jeigu vartotojas nepasakė kiek turi būti pažymių
     if(n == -1) n = generator.rnd(0, 15); 
 
-    grades.reserve(n);
-    for(int i=0; i<n; i++) grades.push_back(generator.rnd(0,10));
+    (*grades).reserve(n);
+    for(int i=0; i<n; i++) (*grades).push_back(generator.rnd(0,10));
     exam_score = generator.rnd(0,10);
 
     if(log) {
       cout<<"\nBuvo sugeneruoti tokie "<<n<<" ND pažymiai: ";
-      for(int grade: grades) cout<<grade<<" ";
+      for(int grade: (*grades)) cout<<grade<<" ";
 
       cout<<"\nIr egzamino rezultatas: "<<exam_score<<endl;
     } 
@@ -74,16 +102,16 @@ void Student::generate_grades(int &n, bool log) {
 void Student::calculate_final(bool is_mean) {
   this->is_mean = is_mean;
   //jeigu yra nd pažymių
-  if(grades.size() != 0) {
+  if((*grades).size() != 0) {
 
     //skaičiuoti per vidurkį
     if(is_mean) { 
-      mean = calculate_mean(grades.size(), grades);
+      mean = calculate_mean((*grades).size(), (*grades));
       final_score_mean = 0.4 * mean + 0.6 * exam_score;
     }
     //skaičiuoti per medianą 
     if(!is_mean) {  
-      median = calculate_median(grades.size(), grades);
+      median = calculate_median((*grades).size(), (*grades));
       final_score_median = 0.4 * median + 0.6 * exam_score;
     } 
   }
@@ -95,12 +123,15 @@ void Student::calculate_final(bool is_mean) {
   }
 }
 
-// palyginimo operatorius
-bool Student::operator < (const Student &another_student) {
-    return this->final_score_mean < another_student.final_score_mean;
-}
 
 //pažymių išvalymas
-void Student::clear_grades() { grades.clear(); }
+void Student::clear_grades() { (*grades).clear(); }
+
+void Student::print_grades() {
+  for(auto i : (*grades)) {
+    cout<<i<<" ";
+  }
+  cout<<endl;
+}
 
 
