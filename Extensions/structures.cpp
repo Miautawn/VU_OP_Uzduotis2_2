@@ -47,16 +47,14 @@ Student& Student::operator=(const Student& other) { //copy operatorius
 }
 
 Student::Student(Student&& other) //move konstruktorius
-      : name{other.name}, last_name{other.last_name},
-        is_mean{other.is_mean}, exam_score{other.exam_score},
-        mean{other.mean}, median{other.median},
-        final_score_mean{other.final_score_mean},
-        final_score_median{other.final_score_median},
-        grades{other.grades}
+      : name{std::move(other.name)}, last_name{std::move(other.last_name)},
+        is_mean{std::move(other.is_mean)}, exam_score{std::move(other.exam_score)},
+        mean{std::move(other.mean)}, median{std::move(other.median)},
+        final_score_mean{std::move(other.final_score_mean)},
+        final_score_median{std::move(other.final_score_median)},
+        grades{std::move(other.grades)}
         {
           other.grades = NULL;
-          other.name.clear();
-          other.last_name.clear();
           other.exam_score = 0;
           other.mean = 0;
           other.median = 0;
@@ -67,24 +65,23 @@ Student::Student(Student&& other) //move konstruktorius
 Student& Student::operator=(Student&& other) { //move operatorius
   if(this == &other) return *this;
   delete grades;
-  grades = other.grades;
-  name = other.name;
-  last_name = other.last_name;
-  exam_score = other.exam_score;
-  is_mean = other.is_mean;
-  mean = other.mean;
-  median = other.median;
-  final_score_mean = other.final_score_mean;
-  final_score_median = other.final_score_median;
+  grades = std::move(other.grades);
+  name = std::move(other.name);
+  last_name = std::move(other.last_name);
+  exam_score = std::move(other.exam_score);
+  is_mean = std::move(other.is_mean);
+  mean = std::move(other.mean);
+  median = std::move(other.median);
+  final_score_mean = std::move(other.final_score_mean);
+  final_score_median = std::move(other.final_score_median);
 
   other.grades = NULL;
-  other.name.clear();
-  other.last_name.clear();
   other.exam_score = 0;
   other.mean = 0;
   other.median = 0;
   other.final_score_mean = 0;
   other.final_score_median = 0;
+
   return *this;
 }
 
@@ -174,9 +171,13 @@ void Student::calculate_final(bool is_mean) {
 
 
 //pažymių išvalymas
-void Student::clear_grades() { (*grades).clear(); }
+void Student::clear_grades() {
+  if(!grades) return;
+  (*grades).clear();
+}
 
 void Student::print_grades() {
+  if(!grades) return;
   for(auto i : (*grades)) {
     cout<<i<<" ";
   }
