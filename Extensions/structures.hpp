@@ -25,8 +25,10 @@ class Student
   public:
     Student(); //konstruktorius
     ~Student(); //destruktorius
-    Student(const Student& other); //copy constructor
-    Student& operator=(const Student& other);
+    Student(const Student& other); //copy konstruktorius
+    Student& operator=(const Student& other); //copy operatorius
+    Student(Student&& other); //move konstruktorius
+    Student& operator=(Student&& other); //move operatorius
     bool operator < (const Student &another_student); //palyginimo operatorius
 
     //getter'iai

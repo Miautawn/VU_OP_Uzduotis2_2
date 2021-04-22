@@ -26,8 +26,11 @@ Student::Student(const Student& other) //copy konstruktorius
         final_score_median{other.final_score_median},
         grades{ new vector<int>( *(other.grades) ) } {}
 
-Student& Student::operator=(const Student& other) {
-  if( this == &other) return *this;
+// konstruktoriai ir operatoriai
+////////////////////////////////
+
+Student& Student::operator=(const Student& other) { //copy operatorius
+  if(this == &other) return *this;
   vector<int> *other_grades = new vector<int>(*(other.grades));
   delete grades;
   grades = other_grades;
@@ -43,9 +46,55 @@ Student& Student::operator=(const Student& other) {
   return *this;
 }
 
+Student::Student(Student&& other) //move konstruktorius
+      : name{other.name}, last_name{other.last_name},
+        is_mean{other.is_mean}, exam_score{other.exam_score},
+        mean{other.mean}, median{other.median},
+        final_score_mean{other.final_score_mean},
+        final_score_median{other.final_score_median},
+        grades{other.grades}
+        {
+          other.grades = NULL;
+          other.name.clear();
+          other.last_name.clear();
+          other.exam_score = 0;
+          other.mean = 0;
+          other.median = 0;
+          other.final_score_mean = 0;
+          other.final_score_median = 0;
+        }
+
+Student& Student::operator=(Student&& other) { //move operatorius
+  if(this == &other) return *this;
+  delete grades;
+  grades = other.grades;
+  name = other.name;
+  last_name = other.last_name;
+  exam_score = other.exam_score;
+  is_mean = other.is_mean;
+  mean = other.mean;
+  median = other.median;
+  final_score_mean = other.final_score_mean;
+  final_score_median = other.final_score_median;
+
+  other.grades = NULL;
+  other.name.clear();
+  other.last_name.clear();
+  other.exam_score = 0;
+  other.mean = 0;
+  other.median = 0;
+  other.final_score_mean = 0;
+  other.final_score_median = 0;
+  return *this;
+}
+
 bool Student::operator < (const Student &another_student) { // palyginimo operatorius
   return this->final_score_mean < another_student.final_score_mean;
 }
+
+////////////////////////////////
+// konstruktoriai ir operatoriai
+
 
 //member funkcijos
 /////////////////
