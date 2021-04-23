@@ -16,6 +16,9 @@ void Student::add_grade(int grade) {(*grades).push_back(grade);}
 void Student::remove_grade() {(*grades).pop_back();}
 void Student::set_exam_score(int exam_score) {this->exam_score = exam_score;}
 
+// konstruktoriai ir operatoriai
+////////////////////////////////
+
 Student::Student() : exam_score{0}, grades{new vector<int>}, is_mean{true} {} //konstruktroius
 Student::~Student() { delete grades; } //destruktorius;
 Student::Student(const Student& other) //copy konstruktorius
@@ -26,8 +29,6 @@ Student::Student(const Student& other) //copy konstruktorius
         final_score_median{other.final_score_median},
         grades{ new vector<int>( *(other.grades) ) } {}
 
-// konstruktoriai ir operatoriai
-////////////////////////////////
 
 Student& Student::operator=(const Student& other) { //copy operatorius
   if(this == &other) return *this;
