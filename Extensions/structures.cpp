@@ -32,6 +32,7 @@ Student::Student(const Student& other) //copy konstruktorius
 
 Student& Student::operator=(const Student& other) { //copy operatorius
   if(this == &other) return *this;
+
   vector<int> *other_grades = new vector<int>(*(other.grades));
   delete grades;
   grades = other_grades;

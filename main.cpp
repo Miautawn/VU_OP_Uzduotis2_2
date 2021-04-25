@@ -32,81 +32,54 @@ int main() {
       }else cout<<"Atšaukiamas benchmark'as...\n"<<endl;
   }
 
-Student a;
-a.set_name("ala");
-a.set_last_name("cringe");
-a.set_exam_score(12);
-a.add_grade(12);
-a.add_grade(13);
-
-int cr;
-int br = cr;
-cout<<br<<endl;
-
-Student b = a;
-
-b.set_name("vaikas");
-cout<<b.get_name()<<endl;
-cout<<b.get_last_name()<<endl;
-
-a.remove_grade();
-a.print_grades();
-b.print_grades();
-
-Student c;
-c = b;
-cout<<c.get_name()<<endl;
-}
-
-
-//   vector <Student> students;
-//   students.reserve(10);
-//   bool manual_input = false;
+  vector <Student> students;
+  students.reserve(10);
+  bool manual_input = false;
  
-//   // //nuskaitymas iš failo
-//   if(yes_or_no("Ar norėtumėte nuskaityti studentų duomenis iš failo?")) {
+  // //nuskaitymas iš failo
+  if(yes_or_no("Ar norėtumėte nuskaityti studentų duomenis iš failo?")) {
 
-//      string file_name = "";
-//      cout<<"\nIveskite failo pavadinimą: ";
-//      cin>>file_name;
+     string file_name = "";
+     cout<<"\nIveskite failo pavadinimą: ";
+     cin>>file_name;
 
-//     try {
-//       read_students_from_file(students, file_name);
-//     } catch(...) {
-//       processException();
-//       cout<<"\nJungiamas rankinis rėžimas...\n"<<endl; 
-//       manual_input = true;
-//     }
-//   } else {
-//       cout<<"\nJungiamas rankinis įvedinmas...\n"<<endl; 
-//       manual_input = true;
-//   }
+    try {
+      read_students_from_file(students, file_name);
+    } catch(...) {
+      processException();
+      cout<<"\nJungiamas rankinis rėžimas...\n"<<endl; 
+      manual_input = true;
+    }
+  } else {
+      cout<<"\nJungiamas rankinis įvedinmas...\n"<<endl; 
+      manual_input = true;
+  }
 
   
-//   while(manual_input) {
-//     if(!yes_or_no("Ar norite pridėti studentą į apskaitą?")) break;
-//     cout<<"\n*************************";
-//     Student new_student;
-//     read_credentials(new_student);
+  while(manual_input) {
+    if(!yes_or_no("Ar norite pridėti studentą į apskaitą?")) break;
+    cout<<"\n*************************";
+    Student new_student;
+    read_credentials(new_student);
 
-//     int grade_num = -1;
-//     if(yes_or_no("Ar žinote kiek studentas turi pažymių už ND,"))
-//     grade_num = input_integer("Kiek (0, 50): ","Įveskite ne neigiamą skaičių: ", 0, 50);
+    int grade_num = -1;
+    if(yes_or_no("Ar žinote kiek studentas turi pažymių už ND,"))
+    grade_num = input_integer("Kiek (0, 50): ","Įveskite ne neigiamą skaičių: ", 0, 50);
 
-//     if(yes_or_no("Ar norėtumėte atsitiktinai sugeneruoti pažymius?"))
-//     new_student.generate_grades(grade_num);
-//     else input_grades(grade_num, new_student);
+    if(yes_or_no("Ar norėtumėte atsitiktinai sugeneruoti pažymius?"))
+    new_student.generate_grades(grade_num);
+    else input_grades(grade_num, new_student);
 
-//     if(yes_or_no("\nSkaičiuoti per vidurkį - y, ar medianą - n? "))
-//     new_student.calculate_final(true);
-//     else new_student.calculate_final(false);
+    if(yes_or_no("\nSkaičiuoti per vidurkį - y, ar medianą - n? "))
+    new_student.calculate_final(true);
+    else new_student.calculate_final(false);
 
-//     students.push_back(new_student);
-//     cout<<"*************************"<<endl;
-//   }
+    students.push_back(new_student);
+    cout<<"*************************"<<endl;
+  }
 
-//   //pateikiama ataskaita
-//   if(!manual_input) output_to_file(students, "NAMES", true);
-//   else output_to_console(students);
+  //pateikiama ataskaita
+  if(!manual_input) output_to_file(students, "NAMES", true);
+  else output_to_console(students);
   
-// }
+}
