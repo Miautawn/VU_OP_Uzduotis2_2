@@ -5,12 +5,27 @@
 #include "random_generator.h"
 #include "utility_functions.hpp"
 
-class Student
+//base class
+class Human
 {
-  // privatūs atributai
-  private:
+  protected:
     string name;
     string last_name;
+    Human(string name = "", string last_name = "");
+
+  public:
+    //privalomai paveldetini metodai
+    virtual string get_name() const = 0;
+    virtual string get_last_name() const = 0;
+
+    virtual void set_name(string name) = 0;
+    virtual void set_last_name(string last_name) = 0;
+};
+
+//derived class
+class Student : public Human
+{
+  private:
     vector<int> *grades;
     int exam_score;
     bool is_mean;
@@ -19,9 +34,9 @@ class Student
     float final_score_mean;
     float final_score_median;
 
+    //internal funkcija
     void validate_grade(string grade_temp, bool exam);
   
-  // vieši atributai ir funkcijos
   public:
     Student(); //konstruktorius
     ~Student(); //destruktorius

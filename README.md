@@ -45,6 +45,8 @@ Programos spartus palyginimus tarp senos ir naudos implementacijos galite matyti
 
 * [v1.2](https://github.com/Miautawn/VU_OP_Uzduotis2_2/releases/tag/v1.2) - "Student" klasėje buvo realizuoti kopijavimo ir perkėlimo konstruktoriai bei operatoriai. Taip pat ir objekto destruktorius.
 
+* [v1.5](https://github.com/Miautawn/VU_OP_Uzduotis2_2/releases/tag/v1.5) - Padaryta nauja abstract "Human" klasė, kurią "Student" dabar paveldi tam, kad gautų vardo ir pavardės atributus.
+
 
 ## <a name="speed-chart"></a>Spartos tyrimas
 Nuo [v0.5](https://github.com/Miautawn/VU_OP_Uzduotis2/releases/tag/v0.5) versijos galima atlikti 'benchmark'ą' su skirtingais konteineriais.  
