@@ -1,5 +1,10 @@
 #include "structures.hpp"
 
+//konstruktorius base clasei
+////////////////////////////
+Human::Human(string name, string last_name) : name{name}, last_name{last_name} {}
+
+
 //getter'iai
 string Student::get_name() const {return name;}
 string Student::get_last_name() const {return last_name;}
@@ -22,7 +27,7 @@ void Student::set_exam_score(int exam_score) {this->exam_score = exam_score;}
 Student::Student() : exam_score{0}, grades{new vector<int>}, is_mean{true} {} //konstruktroius
 Student::~Student() { delete grades; } //destruktorius;
 Student::Student(const Student& other) //copy konstruktorius
-      : name{other.name}, last_name{other.last_name},
+      : Human{other.name, other.last_name},
         is_mean{other.is_mean}, exam_score{other.exam_score},
         mean{other.mean}, median{other.median},
         final_score_mean{other.final_score_mean}, 
@@ -49,7 +54,7 @@ Student& Student::operator=(const Student& other) { //copy operatorius
 }
 
 Student::Student(Student&& other) //move konstruktorius
-      : name{std::move(other.name)}, last_name{std::move(other.last_name)},
+      : Human( std::move(other.name), std::move(other.last_name)),
         is_mean{std::move(other.is_mean)}, exam_score{std::move(other.exam_score)},
         mean{std::move(other.mean)}, median{std::move(other.median)},
         final_score_mean{std::move(other.final_score_mean)},
