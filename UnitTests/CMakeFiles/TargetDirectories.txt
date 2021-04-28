@@ -1,0 +1,3 @@
+/home/miautawn/VU_OP_Uzduotis2_2/UnitTests/CMakeFiles/rebuild_cache.dir
+/home/miautawn/VU_OP_Uzduotis2_2/UnitTests/CMakeFiles/edit_cache.dir
+/home/miautawn/VU_OP_Uzduotis2_2/UnitTests/CMakeFiles/executeTests.dir
